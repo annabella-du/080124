@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6ooero14q68y"]
+
+[ext_resource type="Texture2D" uid="uid://bb1fnpgmfmlbf" path="res://assets/camelot_ [version 1.0]/merlin_.png" id="1_3m6o4"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_ry2g8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnox3"]
+radius = 5.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ry2g8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3m6o4")
+hframes = 8
+vframes = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_pnox3")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
