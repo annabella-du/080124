@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6ooero14q68y"]
+[gd_scene load_steps=9 format=3 uid="uid://b6ooero14q68y"]
 
 [ext_resource type="Texture2D" uid="uid://bb1fnpgmfmlbf" path="res://assets/camelot_ [version 1.0]/merlin_.png" id="1_3m6o4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ry2g8"]
@@ -6,6 +6,80 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pnox3"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="Animation" id="Animation_wde6k"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ucg6u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6i0tp"]
+resource_name = "run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dxn5o"]
+resource_name = "jump"
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ph53y"]
+_data = {
+"RESET": SubResource("Animation_ucg6u"),
+"idle": SubResource("Animation_wde6k"),
+"jump": SubResource("Animation_dxn5o"),
+"run": SubResource("Animation_6i0tp")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ry2g8")
@@ -20,7 +94,13 @@ position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_pnox3")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.075
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ph53y")
+}
+autoplay = "idle"
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck44syn4yoe8t"]
+
+[ext_resource type="Texture2D" uid="uid://b8uweqcf5f2af" path="res://assets/camelot_ [version 1.0]/staff_ [merlin].png" id="1_cih5w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sym10"]
+radius = 4.0
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_t46l6"]
+resource_name = "idle"
+loop_mode = 1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jrhc8"]
+_data = {
+"idle": SubResource("Animation_t46l6")
+}
+
+[node name="Staff" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sym10")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cih5w")
+hframes = 4
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jrhc8")
+}
+autoplay = "idle"

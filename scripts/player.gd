@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite2D
 @onready var coyote_timer = $CoyoteTimer
+@onready var animation = $AnimationPlayer
 
 @export_category("Basic Movement")
 @export var speed := 95.0
@@ -16,7 +17,7 @@ extends CharacterBody2D
 @onready var fall_gravity := (2.0 * jump_max_height) / (jump_time_to_descent ** 2)
 
 @export_category("Coyote Time")
-@export var coyote_time := 0.05
+@export var coyote_time := 0.075
 var coyote_active := false
 var can_coyote := false
 
@@ -27,20 +28,20 @@ func _physics_process(delta):
 	#gravity
 	if velocity.y < 0: #jumping
 		velocity.y += jump_gravity * delta
-	else: #falling:
+	else: #falling
 		velocity.y += fall_gravity * delta
 	
 	#horizontal movement
 	var horizontal_dir = Input.get_axis("left", "right")
-	if horizontal_dir == 0:
+	if horizontal_dir == 0: #not moving
 		velocity.x = move_toward(velocity.x, 0, acceleration)
-	else:
+	else: #moving
 		velocity.x = move_toward(velocity.x, speed * horizontal_dir, acceleration)
 	
 	#face movement direction
-	if velocity.x > 0:
+	if velocity.x > 0: #facing right
 		sprite.flip_h = false
-	elif velocity.x < 0:
+	elif velocity.x < 0: #facing left
 		sprite.flip_h = true
 	
 	#jump
@@ -60,6 +61,14 @@ func _physics_process(delta):
 		coyote_timer.start()
 	if is_on_floor():
 		can_coyote = true
+	
+	#animation
+	if !is_on_floor():
+		animation.play("jump")
+	elif velocity.x == 0:
+		animation.play("idle")
+	else:
+		animation.play("run")
 	
 	move_and_slide()
 
