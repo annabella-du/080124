@@ -1,6 +1,6 @@
 # 080124 Game
 Doesn't have a name yet </br>
-Prep for Mini Jame Gam #33</br>
+Made for Mini Jame Gam #33</br>
 Platformer game </br>
 ### Controls
 Movement: </br>
