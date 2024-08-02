@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4nwu3mw6c5hb"]
+
+[ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_870kh"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ei2pk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i4tbw"]
+_data = {
+"RESET": SubResource("Animation_ei2pk"),
+"idle": SubResource("Animation_870kh")
+}
+
+[node name="KnightRed" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b5rin")
+hframes = 8
+vframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_b0rh1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i4tbw")
+}
+autoplay = "idle"
