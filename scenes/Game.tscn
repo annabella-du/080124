@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://do35cdniy37m4"]
+[gd_scene load_steps=6 format=3 uid="uid://do35cdniy37m4"]
 
 [ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_oghll"]
 [ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="2_hyg3h"]
+[ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/KnightRed.tscn" id="3_sqlxg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8735"]
 texture = ExtResource("1_oghll")
@@ -301,3 +302,6 @@ position = Vector2(21, -12)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 5)
 zoom = Vector2(3, 3)
+
+[node name="KnightRed" parent="." instance=ExtResource("3_sqlxg")]
+position = Vector2(-92, -12)

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sprite = $Sprite2D
 @onready var coyote_timer = $CoyoteTimer
-@onready var animation = $AnimationPlayer
+@onready var animation_player = $AnimationPlayer
 @onready var staff = $Staff
 
 @export_category("Basic Movement")
@@ -29,7 +29,6 @@ func _physics_process(delta):
 	movement(delta)
 	swing()
 	animations()
-	
 	move_and_slide()
 
 func movement(delta : float):
@@ -85,11 +84,11 @@ func swing():
 
 func animations():
 	if !is_on_floor():
-		animation.play("jump")
+		animation_player.play("jump")
 	elif velocity.x == 0:
-		animation.play("idle")
+		animation_player.play("idle")
 	else:
-		animation.play("run")
+		animation_player.play("run")
 
 func _on_coyote_timer_timeout():
 	coyote_active = false

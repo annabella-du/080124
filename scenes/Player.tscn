@@ -86,7 +86,7 @@ _data = {
 radius = 6.0
 height = 18.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ry2g8")
@@ -114,7 +114,9 @@ autoplay = "idle"
 z_index = -1
 position = Vector2(10, 9)
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["player"]]
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 5)
