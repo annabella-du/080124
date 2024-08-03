@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
+@onready var global = get_node("/root/global")
 @onready var sprite = $Sprite2D
 @onready var detection_area = $DetectionArea
 @onready var attack_area = $AttackArea
 @onready var light = $PointLight2D
 @onready var animation_player = $AnimationPlayer
 @onready var sword = $Sword
+@onready var alarm_red = $AlarmRed
+@onready var alarm_yellow = $AlarmYellow
 
 @export var pause_length := 1.2
 @onready var patrol_timer = $PatrolTimer
@@ -25,11 +28,11 @@ func _ready():
 	patrol_timer.wait_time = pause_length
 
 func _physics_process(_delta):
-	movement()
-	animation()
-	attack()
-	
-	move_and_slide()
+	if !global.paused:
+		movement()
+		animation()
+		attack()
+		move_and_slide()
 
 func face_right():
 	sprite.flip_h = false
@@ -96,18 +99,22 @@ func attack():
 
 func _on_detection_area_area_entered(area):
 	if area.is_in_group("player"):
+		alarm_yellow.visible = true
 		player = area
 
 func _on_detection_area_area_exited(area):
 	if area.is_in_group("player"):
+		alarm_yellow.visible = false
 		player = null
 
 func _on_attack_area_area_entered(area):
 	if area.is_in_group("player"):
+		alarm_red.visible = true
 		attacking = true
 
 func _on_attack_area_area_exited(area):
 	if area.is_in_group("player"):
+		alarm_red.visible = false
 		attacking = false
 		sword.start = true
 

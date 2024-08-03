@@ -2,8 +2,10 @@ extends Node
 
 @onready var darks = get_tree().get_nodes_in_group("dark")
 @onready var lights = get_tree().get_nodes_in_group("light")
+@onready var player = get_tree().get_first_node_in_group("player")
 
 var light_active := true
+var paused := false
 
 func _ready():
 	light_on()
@@ -17,6 +19,7 @@ func _input(event):
 
 func light_on():
 	light_active = true
+	player.can_attack = false
 	for i in darks:
 		i.visible = false
 	for j in lights:
@@ -24,6 +27,7 @@ func light_on():
 
 func light_off():
 	light_active = false
+	player.can_attack = true
 	for i in darks:
 		i.visible = true
 	for j in lights:
