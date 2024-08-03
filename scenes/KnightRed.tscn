@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4nwu3mw6c5hb"]
+[gd_scene load_steps=12 format=3 uid="uid://c4nwu3mw6c5hb"]
 
 [ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
 [ext_resource type="Script" path="res://scripts/knight.gd" id="1_tyoa0"]
+[ext_resource type="PackedScene" uid="uid://c76mv0pmmdjiw" path="res://scenes/Sword.tscn" id="3_b1dr1"]
+[ext_resource type="Texture2D" uid="uid://c6u8voikexr6" path="res://assets/light1.png" id="4_2d15m"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
 radius = 4.0
@@ -65,11 +67,15 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_305q6"]
 radius = 9.0
-height = 96.0
+height = 92.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmdje"]
+radius = 8.0
+height = 40.0
 
 [node name="KnightRed" type="CharacterBody2D"]
 collision_layer = 8
-collision_mask = 7
+collision_mask = 2
 script = ExtResource("1_tyoa0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -78,6 +84,7 @@ hframes = 8
 vframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_b0rh1")
 
@@ -87,14 +94,34 @@ libraries = {
 }
 autoplay = "idle"
 
+[node name="Sword" parent="." instance=ExtResource("3_b1dr1")]
+visible = false
+position = Vector2(10, 9)
+
 [node name="DetectionArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 6
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(31, 4)
+position = Vector2(29, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_305q6")
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(14, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_nmdje")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(29, 0)
+color = Color(0.305882, 0.356863, 0.192157, 1)
+texture = ExtResource("4_2d15m")
+
 [connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
+[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_area_exited"]

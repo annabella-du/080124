@@ -28,7 +28,7 @@ func _ready():
 func _physics_process(delta):
 	movement(delta)
 	swing()
-	animations()
+	animation()
 	move_and_slide()
 
 func movement(delta : float):
@@ -82,7 +82,7 @@ func swing():
 		else: #facing right
 			staff.swing("right")
 
-func animations():
+func animation():
 	if !is_on_floor():
 		animation_player.play("jump")
 	elif velocity.x == 0:
