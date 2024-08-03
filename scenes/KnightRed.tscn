@@ -132,7 +132,8 @@ position = Vector2(-40, 0)
 [node name="RightPatrol" type="Node2D" parent="."]
 position = Vector2(80, 0)
 
-[connection signal="area_entered" from="Knight/DetectionArea" to="." method="_on_detection_area_area_entered"]
-[connection signal="area_exited" from="Knight/DetectionArea" to="." method="_on_detection_area_area_exited"]
-[connection signal="area_entered" from="Knight/AttackArea" to="." method="_on_attack_area_area_entered"]
-[connection signal="area_exited" from="Knight/AttackArea" to="." method="_on_attack_area_area_exited"]
+[connection signal="area_entered" from="Knight/DetectionArea" to="Knight" method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="Knight/DetectionArea" to="Knight" method="_on_detection_area_area_exited"]
+[connection signal="area_entered" from="Knight/AttackArea" to="Knight" method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="Knight/AttackArea" to="Knight" method="_on_attack_area_area_exited"]
+[connection signal="timeout" from="Knight/PatrolTimer" to="Knight" method="_on_patrol_timer_timeout"]

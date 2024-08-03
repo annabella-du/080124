@@ -12,7 +12,8 @@ extends CharacterBody2D
 var left_patrol : float
 var right_patrol : float
 var patrol_dir = 1
-var patrol_paused = false
+var patrol_paused := false
+var pause_started := false
 
 @export var chase_speed := 60.0
 @export var patrol_speed := 40.0
@@ -30,38 +31,56 @@ func _physics_process(_delta):
 	
 	move_and_slide()
 
+func face_right():
+	sprite.flip_h = false
+	sword.scale.x = 1
+	sword.position.x = abs(sword.position.x)
+	detection_area.scale.x = 1
+	attack_area.scale.x = 1
+	light.position.x = abs(light.position.x)
+
+func face_left():
+	sprite.flip_h = true
+	sword.scale.x = -1
+	sword.position.x = -abs(sword.position.x)
+	detection_area.scale.x = -1
+	attack_area.scale.x = -1
+	light.position.x = -abs(light.position.x)
+
 func movement():
 	if attacking:
 		velocity.x = 0
 	elif player != null: #player is detected
+		print(1)
 		#restrict movement to patrol area
 		if global_position.x <= left_patrol or global_position.x >= right_patrol: 
 			player = null
 		elif player.global_position.x > global_position.x: #facing right
-			sprite.flip_h = false
-			sword.scale.x = 1
-			sword.position.x = abs(sword.position.x)
-			detection_area.scale.x = 1
-			attack_area.scale.x = 1
-			light.position.x = abs(light.position.x)
 			velocity.x = chase_speed
 		else: #facing left
-			sprite.flip_h = true
-			sword.scale.x = -1
-			sword.position.x = -abs(sword.position.x)
-			detection_area.scale.x = -1
-			attack_area.scale.x = -1
-			light.position.x = -abs(light.position.x)
 			velocity.x = -chase_speed
 	else: #patroling
 		#change position if position gets to patrol
-		if global_position.x <= left_patrol:
+		if global_position.x <= left_patrol and !pause_started:
 			patrol_paused = true
+			pause_started = true
 			patrol_timer.start()
 			patrol_dir = 1
-		elif global_position.x >= right_patrol:
-			pass
-		velocity.x = patrol_dir * patrol_speed
+		elif global_position.x >= right_patrol and !pause_started:
+			patrol_paused = true
+			pause_started = true
+			patrol_timer.start()
+			patrol_dir = -1
+		if patrol_paused:
+			velocity.x = 0
+		else:
+			pause_started = false
+			velocity.x = patrol_dir * patrol_speed
+	
+	if velocity.x > 0:
+		face_right()
+	elif velocity.x < 0:
+		face_left()
 
 func animation():
 	if velocity.x == 0:
@@ -92,3 +111,6 @@ func _on_attack_area_area_exited(area):
 	if area.is_in_group("player"):
 		attacking = false
 		sword.start = true
+
+func _on_patrol_timer_timeout():
+	patrol_paused = false
