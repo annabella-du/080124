@@ -51,7 +51,6 @@ func movement():
 	if attacking:
 		velocity.x = 0
 	elif player != null: #player is detected
-		print(1)
 		#restrict movement to patrol area
 		if global_position.x <= left_patrol or global_position.x >= right_patrol: 
 			player = null

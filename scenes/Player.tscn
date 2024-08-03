@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6ooero14q68y"]
+[gd_scene load_steps=13 format=3 uid="uid://b6ooero14q68y"]
 
 [ext_resource type="Texture2D" uid="uid://bb1fnpgmfmlbf" path="res://assets/camelot_ [version 1.0]/merlin_.png" id="1_3m6o4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ry2g8"]
@@ -86,6 +86,17 @@ _data = {
 radius = 6.0
 height = 18.0
 
+[sub_resource type="Gradient" id="Gradient_vnoma"]
+offsets = PackedFloat32Array(0.012987, 0.733766)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wmx57"]
+gradient = SubResource("Gradient_vnoma")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 9
@@ -99,7 +110,7 @@ vframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
-position = Vector2(0, 5)
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_pnox3")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
@@ -121,7 +132,13 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, 5)
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ooqce")
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["dark"]]
+position = Vector2(0, 4)
+color = Color(0.305882, 0.356863, 0.192157, 1)
+energy = 3.0
+texture = SubResource("GradientTexture2D_wmx57")
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -299,6 +299,10 @@ sources/3 = SubResource("TileSetAtlasSource_aanif")
 
 [node name="Game" type="Node2D"]
 
+[node name="BackgroundLighting2" type="DirectionalLight2D" parent="." groups=["dark"]]
+z_index = -10
+blend_mode = 1
+
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -10
 tile_set = SubResource("TileSet_tbk11")
@@ -318,7 +322,6 @@ zoom = Vector2(3, 3)
 [node name="KnightRed" parent="." instance=ExtResource("3_sqlxg")]
 position = Vector2(-92, -12)
 
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
+[node name="BackgroundLighting" type="DirectionalLight2D" parent="."]
 color = Color(0.666569, 0.666569, 0.666569, 1)
 blend_mode = 1
