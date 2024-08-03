@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://c4nwu3mw6c5hb"]
+[gd_scene load_steps=13 format=3 uid="uid://c4nwu3mw6c5hb"]
 
 [ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
+[ext_resource type="Script" path="res://scripts/knight_patrol.gd" id="1_epjps"]
 [ext_resource type="Script" path="res://scripts/knight.gd" id="1_tyoa0"]
 [ext_resource type="PackedScene" uid="uid://c76mv0pmmdjiw" path="res://scenes/Sword.tscn" id="3_b1dr1"]
 [ext_resource type="Texture2D" uid="uid://c6u8voikexr6" path="res://assets/light1.png" id="4_2d15m"]
@@ -14,7 +15,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Knight/Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -31,7 +32,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Knight/Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -48,7 +49,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Knight/Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -71,57 +72,67 @@ height = 92.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmdje"]
 radius = 8.0
-height = 40.0
+height = 38.0
 
-[node name="KnightRed" type="CharacterBody2D"]
-collision_layer = 8
-collision_mask = 2
+[node name="KnightRed" type="Node2D"]
+z_index = -1
+script = ExtResource("1_epjps")
+
+[node name="Knight" type="CharacterBody2D" parent="."]
 script = ExtResource("1_tyoa0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Knight"]
 texture = ExtResource("1_b5rin")
 hframes = 8
 vframes = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight"]
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_b0rh1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Knight"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i4tbw")
 }
 autoplay = "idle"
 
-[node name="Sword" parent="." instance=ExtResource("3_b1dr1")]
-visible = false
+[node name="Sword" parent="Knight" instance=ExtResource("3_b1dr1")]
 position = Vector2(10, 9)
 
-[node name="DetectionArea" type="Area2D" parent="."]
+[node name="DetectionArea" type="Area2D" parent="Knight"]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/DetectionArea"]
 position = Vector2(29, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_305q6")
 
-[node name="AttackArea" type="Area2D" parent="."]
+[node name="AttackArea" type="Area2D" parent="Knight"]
 collision_layer = 8
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(14, 4)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/AttackArea"]
+position = Vector2(12, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nmdje")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="Knight"]
 position = Vector2(29, 0)
 color = Color(0.305882, 0.356863, 0.192157, 1)
+energy = 0.8
 texture = ExtResource("4_2d15m")
 
-[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
-[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
-[connection signal="area_entered" from="AttackArea" to="." method="_on_attack_area_area_entered"]
-[connection signal="area_exited" from="AttackArea" to="." method="_on_attack_area_area_exited"]
+[node name="PatrolTimer" type="Timer" parent="Knight"]
+
+[node name="LeftPatrol" type="Node2D" parent="."]
+position = Vector2(-40, 0)
+
+[node name="RightPatrol" type="Node2D" parent="."]
+position = Vector2(80, 0)
+
+[connection signal="area_entered" from="Knight/DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="Knight/DetectionArea" to="." method="_on_detection_area_area_exited"]
+[connection signal="area_entered" from="Knight/AttackArea" to="." method="_on_attack_area_area_entered"]
+[connection signal="area_exited" from="Knight/AttackArea" to="." method="_on_attack_area_area_exited"]
