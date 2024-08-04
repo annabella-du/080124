@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var animation_player = $AnimationPlayer
 @onready var heart_layer = $HeartLayer
 @onready var shoot_point = $ShootPoint
+@onready var potions_parent = get_tree().get_first_node_in_group("potions_parent")
+@onready var attack_cooldown = $AttackCooldown
 
 @export var potion : Resource
 @export var health := 3
@@ -25,20 +27,24 @@ var can_hurt := true
 var coyote_active := false
 var can_coyote := false
 
-var can_attack : bool
+var can_attack := true
 var hurt_anim := false
 var paused := false
 var dead := false
+var shoot_dir := -1
 
 func _ready():
+	can_attack = true
 	coyote_timer.wait_time = coyote_time
 	global.connect("pause", _on_global_pause)
 	global.connect("unpause", _on_global_unpause)
 	heart_layer.health = health
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("d2"):
-		shoot()
+	if Input.is_action_just_pressed("attack") and can_attack:
+		potions_parent.shoot(shoot_dir)
+		attack_cooldown.start()
+		can_attack = false
 	if !paused:
 		movement(delta)
 		animation()
@@ -62,12 +68,14 @@ func movement(delta : float):
 	if velocity.x > 0: #facing right
 		sprite.flip_h = false
 		shoot_point.position.x = -abs(shoot_point.position.x)
+		shoot_dir = -1
 		#if staff.can_swing:
 			#staff.scale.x = 1 
 			#staff.position.x = abs(staff.position.x)
 	elif velocity.x < 0: #facing left
 		sprite.flip_h = true
 		shoot_point.position.x = abs(shoot_point.position.x)
+		shoot_dir = 1
 		#if staff.can_swing:
 			#staff.scale.x = -1
 			#staff.position.x = -abs(staff.position.x)
@@ -89,14 +97,6 @@ func movement(delta : float):
 		coyote_timer.start()
 	if is_on_floor():
 		can_coyote = true
-
-func shoot():
-	var new_potion = potion.instantiate()
-	new_potion.position = shoot_point.position
-	if !sprite.flip_h: #facing right
-		new_potion.dir = -1
-	else: #facing left
-		new_potion.dir = 1
 
 #won't run
 func swing():
@@ -150,3 +150,6 @@ func _on_global_pause():
 
 func _on_global_unpause():
 	paused = false
+
+func _on_attack_cooldown_timeout():
+	can_attack = true
