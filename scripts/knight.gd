@@ -23,12 +23,17 @@ var pause_started := false
 
 var player = null
 var attacking := false
+var paused := false
 
 func _ready():
 	patrol_timer.wait_time = pause_length
+	alarm_red.visible = false
+	alarm_yellow.visible = false
+	global.connect("pause", _on_global_pause)
+	global.connect("unpause", _on_global_unpause)
 
 func _physics_process(_delta):
-	if !global.paused:
+	if !paused:
 		movement()
 		animation()
 		attack()
@@ -120,3 +125,10 @@ func _on_attack_area_area_exited(area):
 
 func _on_patrol_timer_timeout():
 	patrol_paused = false
+
+func _on_global_pause():
+	paused = true
+	animation_player.stop()
+
+func _on_global_unpause():
+	paused = false

@@ -7,10 +7,23 @@ extends Node
 var light_active := true
 var paused := false
 
+signal pause
+signal unpause
+
+func pause_func():
+	pause.emit()
+
 func _ready():
 	light_on()
 
 func _input(event):
+	if event.is_action_pressed("pause") and !player.dead:
+		if !paused:
+			pause.emit()
+			paused = true
+		else:
+			unpause.emit()
+			paused = false
 	if event.is_action_pressed("d1"):
 		if light_active:
 			light_off()

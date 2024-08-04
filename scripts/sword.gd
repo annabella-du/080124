@@ -9,9 +9,12 @@ extends Area2D
 
 var can_swing := true
 var start := true
+var paused := false
 
 func _ready():
 	disable()
+	global.connect("pause", _on_global_pause)
+	global.connect("unpause", _on_global_unpause)
 
 func swing(dir : String):
 	if can_swing:
@@ -44,3 +47,9 @@ func _on_animation_player_animation_finished(anim_name):
 
 func _on_cooldown_timer_timeout():
 	can_swing = true
+
+func _on_global_pause():
+	paused = true
+
+func _on_global_unpause():
+	paused = false
