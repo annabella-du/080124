@@ -24,6 +24,12 @@ var pause_started := false
 var player = null
 var attacking := false
 var paused := false
+var hurt := false
+
+func hurt_func():
+	hurt = true
+	print("hurt")
+	animation_player.play("hurt")
 
 func _ready():
 	patrol_timer.wait_time = pause_length
@@ -33,7 +39,7 @@ func _ready():
 	global.connect("unpause", _on_global_unpause)
 
 func _physics_process(_delta):
-	if !paused:
+	if !paused and !hurt:
 		movement()
 		animation()
 		attack()
@@ -132,3 +138,7 @@ func _on_global_pause():
 
 func _on_global_unpause():
 	paused = false
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "hurt":
+		hurt = false

@@ -4,7 +4,9 @@ extends CharacterBody2D
 @onready var coyote_timer = $CoyoteTimer
 @onready var animation_player = $AnimationPlayer
 @onready var heart_layer = $HeartLayer
+@onready var shoot_point = $ShootPoint
 
+@export var potion : Resource
 @export var health := 3
 var can_hurt := true
 @export var speed := 95.0
@@ -35,6 +37,8 @@ func _ready():
 	heart_layer.health = health
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("d2"):
+		shoot()
 	if !paused:
 		movement(delta)
 		animation()
@@ -57,11 +61,13 @@ func movement(delta : float):
 	#face movement direction
 	if velocity.x > 0: #facing right
 		sprite.flip_h = false
+		shoot_point.position.x = -abs(shoot_point.position.x)
 		#if staff.can_swing:
 			#staff.scale.x = 1 
 			#staff.position.x = abs(staff.position.x)
 	elif velocity.x < 0: #facing left
 		sprite.flip_h = true
+		shoot_point.position.x = abs(shoot_point.position.x)
 		#if staff.can_swing:
 			#staff.scale.x = -1
 			#staff.position.x = -abs(staff.position.x)
@@ -83,6 +89,14 @@ func movement(delta : float):
 		coyote_timer.start()
 	if is_on_floor():
 		can_coyote = true
+
+func shoot():
+	var new_potion = potion.instantiate()
+	new_potion.position = shoot_point.position
+	if !sprite.flip_h: #facing right
+		new_potion.dir = -1
+	else: #facing left
+		new_potion.dir = 1
 
 #won't run
 func swing():

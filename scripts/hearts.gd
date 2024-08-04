@@ -11,7 +11,7 @@ func _ready():
 	heart2.visible = true
 	heart3.visible = true
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	match health:
 		3:
 			heart1.visible = false

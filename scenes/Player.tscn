@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6ooero14q68y"]
+[gd_scene load_steps=20 format=3 uid="uid://b6ooero14q68y"]
 
 [ext_resource type="Texture2D" uid="uid://bb1fnpgmfmlbf" path="res://assets/camelot_ [version 1.0]/merlin_.png" id="1_3m6o4"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_ry2g8"]
+[ext_resource type="PackedScene" uid="uid://bfci35gj6rbxk" path="res://scenes/Potion.tscn" id="2_45w44"]
 [ext_resource type="Script" path="res://scripts/hearts.gd" id="3_1hnl3"]
 [ext_resource type="Texture2D" uid="uid://b0mefdeacpndd" path="res://assets/Heart Asset/HeartBackground.png" id="3_h78tk"]
 [ext_resource type="Texture2D" uid="uid://dct1cq34743" path="res://assets/Heart Asset/Heart3.png" id="3_vitxc"]
@@ -140,6 +141,7 @@ fill_from = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ry2g8")
+potion = ExtResource("2_45w44")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -199,6 +201,9 @@ texture = ExtResource("5_04yme")
 position = Vector2(88, 40)
 scale = Vector2(3, 3)
 texture = ExtResource("3_vitxc")
+
+[node name="ShootPoint" type="Node2D" parent="."]
+position = Vector2(-9, 2)
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c4nwu3mw6c5hb"]
+[gd_scene load_steps=27 format=3 uid="uid://c4nwu3mw6c5hb"]
 
 [ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
 [ext_resource type="Script" path="res://scripts/knight_patrol.gd" id="1_epjps"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dwejobi5tcoon" path="res://assets/alarm_yellow.png" id="6_6ekaq"]
 [ext_resource type="Texture2D" uid="uid://bb6hk6fljmuw6" path="res://assets/torch.png" id="6_eiywf"]
 [ext_resource type="Texture2D" uid="uid://0sxqkwiexbcq" path="res://assets/alarm_red.png" id="6_pgiyj"]
+[ext_resource type="Script" path="res://scripts/enemy_hurtbox.gd" id="8_3bkpr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
 radius = 4.0
@@ -62,9 +63,26 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_ecbbk"]
+resource_name = "hurt"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Knight/Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i4tbw"]
 _data = {
 "RESET": SubResource("Animation_ei2pk"),
+"hurt": SubResource("Animation_ecbbk"),
 "idle": SubResource("Animation_870kh"),
 "run": SubResource("Animation_qplud")
 }
@@ -76,6 +94,10 @@ height = 92.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmdje"]
 radius = 8.0
 height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6ckxp"]
+radius = 9.0
+height = 24.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cr88s"]
 atlas = ExtResource("6_eiywf")
@@ -190,6 +212,13 @@ texture = ExtResource("6_pgiyj")
 position = Vector2(0, -14)
 texture = ExtResource("6_6ekaq")
 
+[node name="HurtBox" type="Area2D" parent="Knight" groups=["enemy"]]
+script = ExtResource("8_3bkpr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/HurtBox"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_6ckxp")
+
 [node name="LeftPatrol" type="Node2D" parent="."]
 z_index = -1
 position = Vector2(-80, 1)
@@ -217,6 +246,7 @@ color = Color(0.890196, 0.576471, 0.278431, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_uwe1s")
 
+[connection signal="animation_finished" from="Knight/AnimationPlayer" to="Knight" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Knight/DetectionArea" to="Knight" method="_on_detection_area_area_entered"]
 [connection signal="area_exited" from="Knight/DetectionArea" to="Knight" method="_on_detection_area_area_exited"]
 [connection signal="area_entered" from="Knight/AttackArea" to="Knight" method="_on_attack_area_area_entered"]

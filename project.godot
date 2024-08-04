@@ -69,7 +69,7 @@ d2={
 
 2d_physics/layer_1="ground"
 2d_physics/layer_2="player"
-2d_physics/layer_3="staff"
+2d_physics/layer_3="potion"
 2d_physics/layer_4="enemy"
 
 [rendering]

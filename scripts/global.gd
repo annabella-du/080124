@@ -24,6 +24,7 @@ func _input(event):
 		else:
 			unpause.emit()
 			paused = false
+	
 	if event.is_action_pressed("d1"):
 		if light_active:
 			light_off()
