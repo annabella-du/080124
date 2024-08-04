@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j6okjwjf4iqf"
-path="res://.godot/imported/potion.png-d086389e4541902b898bfc8454ba554d.ctex"
+uid="uid://bf471v27mcas"
+path="res://.godot/imported/torch_red.png-67fe75ef8cb19f26adcef12798d154bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/potion.png"
-dest_files=["res://.godot/imported/potion.png-d086389e4541902b898bfc8454ba554d.ctex"]
+source_file="res://assets/Custom Assets/torch_red.png"
+dest_files=["res://.godot/imported/torch_red.png-67fe75ef8cb19f26adcef12798d154bf.ctex"]
 
 [params]
 

@@ -1,18 +1,14 @@
-extends CharacterBody2D
+extends Area2D
 
-@export var speed := 120.0
+@export var speed := 160.0
 var dir := -1
 
 func _physics_process(delta):
-	velocity.x = speed * dir
-	var collision = move_and_collide(Vector2(speed * dir * delta, 0))
-	if collision:
-		print(collision.get_collider_id())
+	global_position.x += speed * dir * delta
 
 func _on_area_entered(area):
 	if area.is_in_group("enemy"):
 		area.hurt()
-
-func _on_body_entered(body):
-	if body.collision_layer == 0:
-		print(1)
+		queue_free()
+	elif area.is_in_group("wall"):
+		queue_free()

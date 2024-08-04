@@ -21,6 +21,8 @@ var pause_started := false
 @export var chase_speed := 60.0
 @export var patrol_speed := 40.0
 
+var red_on := false
+var yellow_on := false
 var player = null
 var attacking := false
 var paused := false
@@ -28,7 +30,12 @@ var hurt := false
 
 func hurt_func():
 	hurt = true
-	print("hurt")
+	if alarm_red.visible:
+		red_on = true
+		alarm_red.visible = false
+	if alarm_yellow.visible:
+		yellow_on = true
+		alarm_yellow.visible = false
 	animation_player.play("hurt")
 
 func _ready():
@@ -110,21 +117,31 @@ func attack():
 
 func _on_detection_area_area_entered(area):
 	if area.is_in_group("player"):
-		alarm_yellow.visible = true
 		player = area
+		if !hurt:
+			alarm_yellow.visible = true
+		else:
+			yellow_on = true
 
 func _on_detection_area_area_exited(area):
 	if area.is_in_group("player"):
+		if yellow_on:
+			yellow_on = false
 		alarm_yellow.visible = false
 		player = null
 
 func _on_attack_area_area_entered(area):
 	if area.is_in_group("player"):
-		alarm_red.visible = true
-		attacking = true
+		if !hurt:
+			alarm_red.visible = true
+			attacking = true
+		else:
+			red_on = true
 
 func _on_attack_area_area_exited(area):
 	if area.is_in_group("player"):
+		if red_on:
+			red_on = false
 		alarm_red.visible = false
 		attacking = false
 		sword.start = true
@@ -142,3 +159,10 @@ func _on_global_unpause():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurt = false
+		if red_on:
+			red_on = false
+			attacking = true
+			alarm_red.visible = true
+		if yellow_on:
+			yellow_on = false
+			alarm_yellow.visible = true

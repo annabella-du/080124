@@ -1,14 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4nwu3mw6c5hb"]
+[gd_scene load_steps=27 format=3 uid="uid://bxou44diy0ov"]
 
-[ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
-[ext_resource type="Script" path="res://scripts/knight_patrol.gd" id="1_epjps"]
-[ext_resource type="Script" path="res://scripts/knight.gd" id="1_tyoa0"]
-[ext_resource type="PackedScene" uid="uid://c76mv0pmmdjiw" path="res://scenes/Sword.tscn" id="3_b1dr1"]
-[ext_resource type="Texture2D" uid="uid://c6u8voikexr6" path="res://assets/Custom Assets/light1.png" id="4_2d15m"]
-[ext_resource type="Texture2D" uid="uid://0sxqkwiexbcq" path="res://assets/Custom Assets/alarm_red.png" id="6_nwyc7"]
-[ext_resource type="Texture2D" uid="uid://dwejobi5tcoon" path="res://assets/Custom Assets/alarm_yellow.png" id="7_ij82n"]
-[ext_resource type="Script" path="res://scripts/enemy_hurtbox.gd" id="8_3bkpr"]
-[ext_resource type="Texture2D" uid="uid://bf471v27mcas" path="res://assets/Custom Assets/torch_red.png" id="9_6plv8"]
+[ext_resource type="Script" path="res://scripts/knight_patrol.gd" id="1_1i77b"]
+[ext_resource type="Script" path="res://scripts/knight.gd" id="2_0aots"]
+[ext_resource type="Texture2D" uid="uid://ct10r56awq4fs" path="res://assets/camelot_ [version 1.0]/percival_.png" id="3_0mor0"]
+[ext_resource type="PackedScene" uid="uid://c76mv0pmmdjiw" path="res://scenes/Sword.tscn" id="4_hxeke"]
+[ext_resource type="Texture2D" uid="uid://c6u8voikexr6" path="res://assets/Custom Assets/light1.png" id="5_y2u1d"]
+[ext_resource type="Texture2D" uid="uid://0sxqkwiexbcq" path="res://assets/Custom Assets/alarm_red.png" id="6_u3318"]
+[ext_resource type="Texture2D" uid="uid://dwejobi5tcoon" path="res://assets/Custom Assets/alarm_yellow.png" id="7_48w7q"]
+[ext_resource type="Script" path="res://scripts/enemy_hurtbox.gd" id="8_xxmb1"]
+[ext_resource type="Texture2D" uid="uid://i3snbykbldtf" path="res://assets/Custom Assets/torch_blue.png" id="9_qe2eq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
 radius = 4.0
@@ -99,43 +99,43 @@ height = 32.0
 radius = 9.0
 height = 24.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hv6bl"]
-atlas = ExtResource("9_6plv8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lax5"]
+atlas = ExtResource("9_qe2eq")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7b2d"]
-atlas = ExtResource("9_6plv8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mdeq4"]
+atlas = ExtResource("9_qe2eq")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k4dfg"]
-atlas = ExtResource("9_6plv8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_opg0x"]
+atlas = ExtResource("9_qe2eq")
 region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ftny5"]
-atlas = ExtResource("9_6plv8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlh3e"]
+atlas = ExtResource("9_qe2eq")
 region = Rect2(96, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rcdvt"]
-atlas = ExtResource("9_6plv8")
+[sub_resource type="AtlasTexture" id="AtlasTexture_yirpf"]
+atlas = ExtResource("9_qe2eq")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aru7e"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hv6bl")
+"texture": SubResource("AtlasTexture_6lax5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o7b2d")
+"texture": SubResource("AtlasTexture_mdeq4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k4dfg")
+"texture": SubResource("AtlasTexture_opg0x")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ftny5")
+"texture": SubResource("AtlasTexture_vlh3e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rcdvt")
+"texture": SubResource("AtlasTexture_yirpf")
 }],
 "loop": true,
 "name": &"default",
@@ -151,15 +151,15 @@ gradient = SubResource("Gradient_0osj8")
 fill = 1
 fill_from = Vector2(0.495413, 0.481651)
 
-[node name="KnightRed" type="Node2D"]
+[node name="KnightBlue" type="Node2D"]
 z_index = -1
-script = ExtResource("1_epjps")
+script = ExtResource("1_1i77b")
 
 [node name="Knight" type="CharacterBody2D" parent="."]
-script = ExtResource("1_tyoa0")
+script = ExtResource("2_0aots")
 
 [node name="Sprite2D" type="Sprite2D" parent="Knight"]
-texture = ExtResource("1_b5rin")
+texture = ExtResource("3_0mor0")
 hframes = 8
 vframes = 10
 
@@ -174,7 +174,7 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="Sword" parent="Knight" instance=ExtResource("3_b1dr1")]
+[node name="Sword" parent="Knight" instance=ExtResource("4_hxeke")]
 position = Vector2(10, 9)
 
 [node name="DetectionArea" type="Area2D" parent="Knight"]
@@ -199,21 +199,21 @@ shape = SubResource("CapsuleShape2D_nmdje")
 position = Vector2(29, 0)
 color = Color(0.305882, 0.356863, 0.192157, 1)
 energy = 0.8
-texture = ExtResource("4_2d15m")
+texture = ExtResource("5_y2u1d")
 
 [node name="PatrolTimer" type="Timer" parent="Knight"]
 
 [node name="AlarmRed" type="Sprite2D" parent="Knight"]
 z_index = 1
 position = Vector2(0, -14)
-texture = ExtResource("6_nwyc7")
+texture = ExtResource("6_u3318")
 
 [node name="AlarmYellow" type="Sprite2D" parent="Knight"]
 position = Vector2(0, -14)
-texture = ExtResource("7_ij82n")
+texture = ExtResource("7_48w7q")
 
 [node name="HurtBox" type="Area2D" parent="Knight" groups=["enemy"]]
-script = ExtResource("8_3bkpr")
+script = ExtResource("8_xxmb1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/HurtBox"]
 position = Vector2(0, 4)

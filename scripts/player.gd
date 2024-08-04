@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var shoot_point = $ShootPoint
 @onready var potions_parent = get_tree().get_first_node_in_group("potions_parent")
 @onready var attack_cooldown = $AttackCooldown
+@onready var cooldown_bar = %ProgressBar
 
 @export var potion : Resource
 @export var health := 3
@@ -39,6 +40,8 @@ func _ready():
 	global.connect("pause", _on_global_pause)
 	global.connect("unpause", _on_global_unpause)
 	heart_layer.health = health
+	cooldown_bar.max_value = attack_cooldown.wait_time
+	cooldown_bar.value = cooldown_bar.max_value
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and can_attack:
@@ -48,6 +51,9 @@ func _physics_process(delta):
 	if !paused:
 		movement(delta)
 		animation()
+		cooldown_bar.value = attack_cooldown.time_left
+		if attack_cooldown.time_left == 0:
+			cooldown_bar.value = cooldown_bar.max_value	
 		move_and_slide()
 
 func movement(delta : float):
@@ -67,15 +73,15 @@ func movement(delta : float):
 	#face movement direction
 	if velocity.x > 0: #facing right
 		sprite.flip_h = false
-		shoot_point.position.x = -abs(shoot_point.position.x)
-		shoot_dir = -1
+		shoot_point.position.x = abs(shoot_point.position.x)
+		shoot_dir = 1
 		#if staff.can_swing:
 			#staff.scale.x = 1 
 			#staff.position.x = abs(staff.position.x)
 	elif velocity.x < 0: #facing left
 		sprite.flip_h = true
-		shoot_point.position.x = abs(shoot_point.position.x)
-		shoot_dir = 1
+		shoot_point.position.x = -abs(shoot_point.position.x)
+		shoot_dir = -1
 		#if staff.can_swing:
 			#staff.scale.x = -1
 			#staff.position.x = -abs(staff.position.x)
