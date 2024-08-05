@@ -156,3 +156,15 @@ func _on_global_unpause():
 
 func _on_attack_cooldown_timeout():
 	can_attack = true
+
+func _on_coin_detection_area_entered(area):
+	if area.is_in_group("coin"):
+		if area.current_status == 0 and !global.light_active and !area.collected: #status.hidden
+			area.transparent()
+
+func _on_coin_collection_area_entered(area):
+	if area.is_in_group("coin"):
+		if area.current_status == 2: #status.regular
+			area.hidden()
+			area.collected = true
+			coins += 1
