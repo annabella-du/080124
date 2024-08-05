@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://do35cdniy37m4"]
+[gd_scene load_steps=12 format=3 uid="uid://do35cdniy37m4"]
 
 [ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_oghll"]
 [ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="2_hyg3h"]
 [ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/KnightRed.tscn" id="3_sqlxg"]
 [ext_resource type="Texture2D" uid="uid://xigm5cetvuxp" path="res://assets/Custom Assets/background.png" id="4_ir0q4"]
 [ext_resource type="PackedScene" uid="uid://dj4bxfjs0mv7i" path="res://scenes/PotionsParent.tscn" id="5_4xxi6"]
+[ext_resource type="PackedScene" uid="uid://dv6yheno2uweb" path="res://scenes/Lever.tscn" id="6_p3spf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8735"]
 texture = ExtResource("1_oghll")
@@ -327,7 +328,7 @@ position = Vector2(-216, -24)
 shape = SubResource("RectangleShape2D_btpyi")
 
 [node name="Player" parent="." instance=ExtResource("2_hyg3h")]
-position = Vector2(21, -12)
+position = Vector2(120, -12)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 5)
@@ -347,3 +348,9 @@ blend_mode = 1
 
 [node name="PotionsParent" parent="." instance=ExtResource("5_4xxi6")]
 unique_name_in_owner = true
+
+[node name="Lever" parent="." instance=ExtResource("6_p3spf")]
+position = Vector2(160, -8)
+
+[node name="Lever2" parent="." instance=ExtResource("6_p3spf")]
+position = Vector2(256, -8)

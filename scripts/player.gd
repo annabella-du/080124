@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var potions_parent = get_tree().get_first_node_in_group("potions_parent")
 @onready var attack_cooldown = $AttackCooldown
 @onready var cooldown_bar = %ProgressBar
+@onready var dark_lighting = $DarkLighting
 
 @export var potion : Resource
 @export var health := 3
@@ -32,7 +33,10 @@ var can_attack := true
 var hurt_anim := false
 var paused := false
 var dead := false
-var shoot_dir := -1
+var shoot_dir := 1
+
+signal lever_on
+signal lever_off
 
 func _ready():
 	can_attack = true
@@ -42,6 +46,7 @@ func _ready():
 	heart_layer.health = health
 	cooldown_bar.max_value = attack_cooldown.wait_time
 	cooldown_bar.value = cooldown_bar.max_value
+	dark_lighting.visible = false
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and can_attack:

@@ -159,7 +159,7 @@ anti_aliasing = false
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 25
 script = ExtResource("1_ry2g8")
 potion = ExtResource("2_45w44")
 
@@ -193,7 +193,7 @@ collision_mask = 8
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ooqce")
 
-[node name="Lighting" type="PointLight2D" parent="." groups=["dark"]]
+[node name="DarkLighting" type="PointLight2D" parent="." groups=["dark"]]
 visible = false
 color = Color(0.305882, 0.356863, 0.192157, 1)
 energy = 3.0
