@@ -8,7 +8,9 @@ extends CharacterBody2D
 @onready var potions_parent = get_tree().get_first_node_in_group("potions_parent")
 @onready var attack_cooldown = $AttackCooldown
 @onready var cooldown_bar = %ProgressBar
+@onready var red_bar = $CanvasLayer/RedBar
 @onready var dark_lighting = $DarkLighting
+@onready var coin_count = %CoinCount
 
 @export var potion : Resource
 @export var health := 3
@@ -34,12 +36,12 @@ var hurt_anim := false
 var paused := false
 var dead := false
 var shoot_dir := 1
+var coins := 0
 
 signal lever_on
 signal lever_off
 
 func _ready():
-	can_attack = true
 	coyote_timer.wait_time = coyote_time
 	global.connect("pause", _on_global_pause)
 	global.connect("unpause", _on_global_unpause)
@@ -47,19 +49,28 @@ func _ready():
 	cooldown_bar.max_value = attack_cooldown.wait_time
 	cooldown_bar.value = cooldown_bar.max_value
 	dark_lighting.visible = false
+	red_bar.visible = false
 
 func _physics_process(delta):
+	if !paused:
+		movement(delta)
+		animation()
+		attack()
+		coin_count.text = "%02d" % coins
+		move_and_slide()
+
+func attack():
 	if Input.is_action_just_pressed("attack") and can_attack:
 		potions_parent.shoot(shoot_dir)
 		attack_cooldown.start()
 		can_attack = false
-	if !paused:
-		movement(delta)
-		animation()
-		cooldown_bar.value = attack_cooldown.time_left
-		if attack_cooldown.time_left == 0:
-			cooldown_bar.value = cooldown_bar.max_value	
-		move_and_slide()
+	cooldown_bar.value = attack_cooldown.time_left
+	if attack_cooldown.time_left == 0:
+		cooldown_bar.value = cooldown_bar.max_value
+	if !global.light_active:
+		red_bar.visible = true
+	else:
+		red_bar.visible = false
 
 func movement(delta : float):
 	#gravity
@@ -80,16 +91,10 @@ func movement(delta : float):
 		sprite.flip_h = false
 		shoot_point.position.x = abs(shoot_point.position.x)
 		shoot_dir = 1
-		#if staff.can_swing:
-			#staff.scale.x = 1 
-			#staff.position.x = abs(staff.position.x)
 	elif velocity.x < 0: #facing left
 		sprite.flip_h = true
 		shoot_point.position.x = -abs(shoot_point.position.x)
 		shoot_dir = -1
-		#if staff.can_swing:
-			#staff.scale.x = -1
-			#staff.position.x = -abs(staff.position.x)
 	
 	#jump
 	if Input.is_action_just_pressed("jump"):
@@ -108,19 +113,6 @@ func movement(delta : float):
 		coyote_timer.start()
 	if is_on_floor():
 		can_coyote = true
-
-#won't run
-func swing():
-	if Input.is_action_just_pressed("swing"):
-		if sprite.flip_h: #facing left
-			pass
-			#staff.swing("left")
-		else: #facing right
-			pass
-			#staff.swing("right")
-func staff_disable():
-	pass
-	#staff.visible = false
 
 func animation():
 	if !hurt_anim:

@@ -22,7 +22,7 @@ func _input(event):
 
 func light_on():
 	light_active = true
-	player.can_attack = false
+	player.can_attack = true
 	for i in darks:
 		i.visible = false
 	for j in lights:
@@ -32,7 +32,7 @@ func light_on():
 
 func light_off():
 	light_active = false
-	player.can_attack = true
+	player.can_attack = false
 	for i in darks:
 		i.visible = true
 	for j in lights:
