@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://5t1igw4r8b7o"]
+
+[ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_hdahn"]
+[ext_resource type="Texture2D" uid="uid://ci3xgc7ghjkok" path="res://assets/Custom Assets/flag.png" id="1_thbra"]
+
+[sub_resource type="Animation" id="Animation_ay4mi"]
+resource_name = "inactive"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w7mic"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8n7rp"]
+resource_name = "active"
+length = 0.6
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i508r"]
+_data = {
+"RESET": SubResource("Animation_w7mic"),
+"active": SubResource("Animation_8n7rp"),
+"inactive": SubResource("Animation_ay4mi")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x2e70"]
+radius = 12.0
+height = 38.0
+
+[sub_resource type="Gradient" id="Gradient_5m7gs"]
+offsets = PackedFloat32Array(0, 0.74026)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dmsej"]
+gradient = SubResource("Gradient_5m7gs")
+width = 48
+height = 48
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Checkpoint" type="Area2D" groups=["checkpoint"]]
+collision_layer = 64
+collision_mask = 2
+script = ExtResource("1_hdahn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_thbra")
+hframes = 4
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i508r")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x2e70")
+
+[node name="ActivateLight" type="PointLight2D" parent="."]
+position = Vector2(-3, -1)
+color = Color(0.305882, 0.356863, 0.192157, 1)
+texture = SubResource("GradientTexture2D_dmsej")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

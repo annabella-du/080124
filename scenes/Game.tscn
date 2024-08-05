@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://do35cdniy37m4"]
+[gd_scene load_steps=14 format=3 uid="uid://do35cdniy37m4"]
 
 [ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_oghll"]
 [ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="2_hyg3h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bxou44diy0ov" path="res://scenes/KnightBlue.tscn" id="6_5a87j"]
 [ext_resource type="PackedScene" uid="uid://dv6yheno2uweb" path="res://scenes/Lever.tscn" id="6_p3spf"]
 [ext_resource type="PackedScene" uid="uid://d33lsavhyihrv" path="res://scenes/Coin.tscn" id="7_qv3rq"]
+[ext_resource type="PackedScene" uid="uid://5t1igw4r8b7o" path="res://scenes/Checkpoint.tscn" id="9_sn8l4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8735"]
 texture = ExtResource("1_oghll")
@@ -329,13 +330,14 @@ position = Vector2(120, -12)
 position = Vector2(0, 5)
 zoom = Vector2(3, 3)
 
-[node name="BackgroundLighting" type="DirectionalLight2D" parent="."]
+[node name="BackgroundLighting" type="DirectionalLight2D" parent="." groups=["light"]]
 color = Color(0.666569, 0.666569, 0.666569, 1)
 blend_mode = 1
 
 [node name="DarkLighting" type="DirectionalLight2D" parent="." groups=["dark"]]
 visible = false
 z_index = -10
+energy = 1.25
 blend_mode = 1
 
 [node name="PotionsParent" parent="." instance=ExtResource("5_4xxi6")]
@@ -347,7 +349,7 @@ unique_name_in_owner = true
 position = Vector2(-250, -12)
 
 [node name="KnightBlue" parent="Enemies" instance=ExtResource("6_5a87j")]
-position = Vector2(240, -12)
+position = Vector2(340, -12)
 
 [node name="Levers" type="Node2D" parent="."]
 
@@ -361,3 +363,11 @@ position = Vector2(0, -8)
 
 [node name="Coin" parent="Coins" instance=ExtResource("7_qv3rq")]
 position = Vector2(-40, -8)
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_sn8l4")]
+position = Vector2(80, -13)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("9_sn8l4")]
+position = Vector2(160, -13)

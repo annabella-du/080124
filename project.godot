@@ -73,6 +73,7 @@ d1={
 2d_physics/layer_4="enemy"
 2d_physics/layer_5="lever"
 2d_physics/layer_6="coin"
+2d_physics/layer_7="checkpoint"
 
 [rendering]
 

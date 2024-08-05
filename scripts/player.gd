@@ -37,12 +37,15 @@ var paused := false
 var dead := false
 var shoot_dir := 1
 var coins := 0
+var saved_coins := 0
 
 signal lever_on
 signal lever_off
 
 func _ready():
 	coyote_timer.wait_time = coyote_time
+	coins = global.saved_coins
+	saved_coins = coins
 	global.connect("pause", _on_global_pause)
 	global.connect("unpause", _on_global_unpause)
 	heart_layer.health = health
@@ -144,7 +147,8 @@ func _on_animation_player_animation_finished(anim_name):
 		can_hurt = true
 		hurt_anim = false
 	elif anim_name == "die":
-		print("game over")
+		global.deaths += 1
+		global.died()
 
 func _on_global_pause():
 	paused = true
@@ -167,4 +171,5 @@ func _on_coin_collection_area_entered(area):
 		if area.current_status == 2: #status.regular
 			area.hidden()
 			area.collected = true
+			area.add_global()
 			coins += 1

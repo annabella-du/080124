@@ -23,11 +23,16 @@ func hidden():
 	current_status = status.hidden
 
 func transparent():
-	sprite.texture = transparent_texture
-	sprite.visible = true
-	current_status = status.transparent
+	if !collected:
+		sprite.texture = transparent_texture
+		sprite.visible = true
+		current_status = status.transparent
 
 func regular():
-	sprite.texture = regular_texture
-	sprite.visible = true
-	current_status = status.regular
+	if !collected:
+		sprite.texture = regular_texture
+		sprite.visible = true
+		current_status = status.regular
+
+func add_global():
+	global.unsaved_coins.append(self)

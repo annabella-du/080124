@@ -5,16 +5,33 @@ extends Node
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var levers = get_tree().get_nodes_in_group("lever")
 
+var restart_path = "user://save_files/restart_variables.save"
 var light_active := true
+var deaths := 0
 var paused := false
+var checkpoint : Area2D
+var unsaved_coins : Array[Resource] = []
+var saved_coins := 0
 
 signal pause
 signal unpause
-signal save
-signal load
 
-func save_func():
-	pass
+func _ready():
+	if FileAccess.file_exists(restart_path):
+		var file = FileAccess.open(restart_path, FileAccess.READ)
+		saved_coins = file.get_var(player.saved_coins)
+
+func save_coins():
+	player.saved_coins = player.coins
+	for i in unsaved_coins:
+		i.queue_free()
+
+func died():
+	get_tree().reload_current_scene()
+
+func save():
+	var file = FileAccess.open(restart_path, FileAccess.WRITE)
+	file.store_var(player.saved_coins)
 
 func _input(event):
 	if event.is_action_pressed("pause") and !player.dead:
