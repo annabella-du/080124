@@ -1,47 +1,35 @@
 extends Node
 
+### PLAYER NODE ###
+@onready var player = get_tree().get_first_node_in_group("player")
+
+### ARRAY OF NODES IN GROUPS ###
 @onready var darks = get_tree().get_nodes_in_group("dark")
 @onready var lights = get_tree().get_nodes_in_group("light")
-@onready var player = get_tree().get_first_node_in_group("player")
 @onready var levers = get_tree().get_nodes_in_group("lever")
 
-var restart_path = "user://save_files/restart_variables.save"
+### VARIABLES ###
 var light_active := true
-var deaths := 0
 var paused := false
-var checkpoint : Area2D
-var unsaved_coins : Array[Resource] = []
-var saved_coins := 0
+var active_checkpoint : Area2D
 
-signal pause
-signal unpause
+### CUSTOM SIGNALS ###
+signal pause_signal
+signal unpause_signal
+signal respawn_signal
 
-func _ready():
-	if FileAccess.file_exists(restart_path):
-		var file = FileAccess.open(restart_path, FileAccess.READ)
-		saved_coins = file.get_var(player.saved_coins)
-
-func save_coins():
-	player.saved_coins = player.coins
-	for i in unsaved_coins:
-		i.queue_free()
-
-func died():
-	get_tree().reload_current_scene()
-
-func save():
-	var file = FileAccess.open(restart_path, FileAccess.WRITE)
-	file.store_var(player.saved_coins)
-
+### BUILT IN FUNCTIONS ###
 func _input(event):
+	### PAUSE AND UNPAUSE ###
 	if event.is_action_pressed("pause") and !player.dead:
 		if !paused:
-			pause.emit()
+			pause_signal.emit()
 			paused = true
 		else:
-			unpause.emit()
+			unpause_signal.emit()
 			paused = false
 
+### LIGHTING FUNCTIONS ###
 func light_on():
 	light_active = true
 	player.can_attack = true
@@ -62,5 +50,9 @@ func light_off():
 	for k in levers:
 		k.off()
 
+### EMIT SIGNAL FUNCTIONS ###
+func died():
+	respawn_signal.emit()
+
 func pause_func():
-	pause.emit()
+	pause_signal.emit()

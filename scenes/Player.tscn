@@ -124,10 +124,6 @@ _data = {
 radius = 4.0
 height = 14.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ooqce"]
-radius = 6.0
-height = 18.0
-
 [sub_resource type="Gradient" id="Gradient_vnoma"]
 offsets = PackedFloat32Array(0.012987, 0.733766)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -138,6 +134,17 @@ width = 128
 height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ooqce"]
+radius = 6.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf5db"]
+radius = 16.4924
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oijmy"]
+radius = 7.0
+height = 22.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ao57m"]
 bg_color = Color(0.207843, 0.207843, 0.25098, 1)
@@ -179,13 +186,6 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 anti_aliasing = false
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qf5db"]
-radius = 16.4924
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oijmy"]
-radius = 7.0
-height = 22.0
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 25
@@ -198,10 +198,6 @@ texture = ExtResource("1_3m6o4")
 hframes = 8
 vframes = 11
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.075
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ph53y")
@@ -213,6 +209,15 @@ z_index = 1
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_pnox3")
 
+[node name="DarkLighting" type="PointLight2D" parent="." groups=["dark"]]
+visible = false
+color = Color(0.305882, 0.356863, 0.192157, 1)
+energy = 1.75
+texture = SubResource("GradientTexture2D_wmx57")
+
+[node name="ShootPoint" type="Node2D" parent="." groups=["shoot_point"]]
+position = Vector2(9, 2)
+
 [node name="HurtBox" type="Area2D" parent="." groups=["player"]]
 z_index = 1
 collision_layer = 2
@@ -222,11 +227,64 @@ collision_mask = 8
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_ooqce")
 
-[node name="DarkLighting" type="PointLight2D" parent="." groups=["dark"]]
+[node name="CoinDetection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinDetection"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_qf5db")
+
+[node name="CoinCollection" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinCollection"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_oijmy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CooldownBar" type="ProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 56.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ao57m")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kxmjj")
+value = 100.0
+show_percentage = false
+
+[node name="CoinCount" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 1168.0
+offset_top = 16.0
+offset_right = 1216.0
+offset_bottom = 64.0
+text = "00"
+label_settings = ExtResource("10_8gol1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Coin" type="TextureRect" parent="CanvasLayer"]
+offset_left = 1216.0
+offset_top = 16.0
+offset_right = 1264.0
+offset_bottom = 64.0
+texture = ExtResource("9_jiofk")
+
+[node name="RedBar" type="ProgressBar" parent="CanvasLayer"]
 visible = false
-color = Color(0.305882, 0.356863, 0.192157, 1)
-energy = 1.75
-texture = SubResource("GradientTexture2D_wmx57")
+z_index = 1
+offset_left = 192.0
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 56.0
+theme_override_styles/background = SubResource("StyleBoxFlat_jb2vx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_y584l")
+value = 100.0
+show_percentage = false
 
 [node name="HeartLayer" type="CanvasLayer" parent="."]
 script = ExtResource("3_1hnl3")
@@ -251,75 +309,17 @@ position = Vector2(88, 40)
 scale = Vector2(3, 3)
 texture = ExtResource("3_vitxc")
 
-[node name="ShootPoint" type="Node2D" parent="." groups=["shoot_point"]]
-position = Vector2(9, 2)
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.075
+one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 1.5
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_left = 192.0
-offset_top = 24.0
-offset_right = 320.0
-offset_bottom = 56.0
-theme_override_styles/background = SubResource("StyleBoxFlat_ao57m")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kxmjj")
-value = 100.0
-show_percentage = false
-
-[node name="RedBar" type="ProgressBar" parent="CanvasLayer"]
-visible = false
-z_index = 1
-offset_left = 192.0
-offset_top = 24.0
-offset_right = 320.0
-offset_bottom = 56.0
-theme_override_styles/background = SubResource("StyleBoxFlat_jb2vx")
-theme_override_styles/fill = SubResource("StyleBoxFlat_y584l")
-value = 100.0
-show_percentage = false
-
-[node name="Coin" type="TextureRect" parent="CanvasLayer"]
-offset_left = 1216.0
-offset_top = 16.0
-offset_right = 1264.0
-offset_bottom = 64.0
-texture = ExtResource("9_jiofk")
-
-[node name="CoinCount" type="Label" parent="CanvasLayer"]
-unique_name_in_owner = true
-offset_left = 1168.0
-offset_top = 16.0
-offset_right = 1216.0
-offset_bottom = 64.0
-text = "00"
-label_settings = ExtResource("10_8gol1")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CoinDetection" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinDetection"]
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_qf5db")
-
-[node name="CoinCollection" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CoinCollection"]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_oijmy")
-
-[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="area_entered" from="CoinDetection" to="." method="_on_coin_detection_area_entered"]
 [connection signal="area_entered" from="CoinCollection" to="." method="_on_coin_collection_area_entered"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -16,10 +16,9 @@ func _input(event):
 
 func activate():
 	animation_player.play("active")
-	if global.checkpoint != null:
-		global.checkpoint.deactivate()
-	global.checkpoint = self
-	global.save_coins()
+	if global.active_checkpoint != null:
+		global.active_checkpoint.deactivate()
+	global.active_checkpoint = self
 	active = true
 
 func deactivate():

@@ -8,6 +8,7 @@ extends Area2D
 enum status {hidden, transparent, regular}
 var current_status : status = status.hidden
 var collected = false
+var saved = false
 
 func _ready():
 	hidden()
@@ -33,6 +34,3 @@ func regular():
 		sprite.texture = regular_texture
 		sprite.visible = true
 		current_status = status.regular
-
-func add_global():
-	global.unsaved_coins.append(self)
