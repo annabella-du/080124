@@ -8,6 +8,7 @@ extends Node
 @onready var light_nodes = get_tree().get_nodes_in_group("light")
 @onready var lever_nodes = get_tree().get_nodes_in_group("lever")
 @onready var coin_nodes = get_tree().get_nodes_in_group("coin")
+@onready var chest_nodes = get_tree().get_nodes_in_group("chest")
 
 ### VARIABLES ###
 var light_active := true
@@ -32,16 +33,24 @@ func _input(event):
 func respawn():
 	### EMIT SIGNAL ###
 	respawn_signal.emit()
-	### RESPAWN COINS ###
+	### RESPAWN COINS AND CHESTS ###
 	for coin in coin_nodes:
 		if !coin.collected:
 			coin.respawn()
+	for chest in chest_nodes:
+		if !chest.collected:
+			chest.respawn()
+	### RESET LIGHTING ###
+	light_on()
 
 func save():
-	player_node.save_coins()
+	player_node.save_coins_keys()
 	for coin in coin_nodes:
 		if coin.collected:
 			coin.saved = true
+	for chest in chest_nodes:
+		if chest.open:
+			chest.saved = true
 
 ### LIGHTING FUNCTIONS ###
 func light_on():

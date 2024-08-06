@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var heart_layer_node = $HeartLayer
 @onready var cooldown_bar_node = %CooldownBar
 @onready var coin_count_node = %CoinCount
+@onready var key_count_node = %KeyCount
 @onready var red_bar_node = $CanvasLayer/RedBar
 
 ### ATTACK NODES ###
@@ -24,6 +25,7 @@ extends CharacterBody2D
 ### BASIC MOVEMENT VARIABLES ###
 @export var speed := 95.0
 @export var acceleration := 100.0
+var on_ladder := false
 
 ### DYNAMIC JUMP VARIABLES ###
 @export var jump_max_height := 35.0
@@ -52,6 +54,11 @@ var coins := 0 #don't directly change this
 var saved_coins := 0
 var unsaved_coins := 0
 
+### KEY VARIABLES ###
+var keys := 0 #don't directly change this
+var saved_keys := 0
+var unsaved_keys := 0
+
 ### OTHER VARIABLES ###
 var paused := false
 var hurt_anim := false
@@ -78,16 +85,17 @@ func _physics_process(delta):
 		movement(delta)
 		animation()
 		attack()
-		update_coins()
+		update_coins_keys()
 		move_and_slide() #DON'T DELETE THIS
 
 ### CUSTOM FUNCTIONS ###
 func movement(delta : float):
 	### GRAVITY
-	if velocity.y < 0: #jumping
-		velocity.y += jump_gravity * delta
-	else: #falling
-		velocity.y += fall_gravity * delta
+	if !on_ladder:
+		if velocity.y < 0: #jumping
+			velocity.y += jump_gravity * delta
+		else: #falling
+			velocity.y += fall_gravity * delta
 	
 	### HORIZONTAL MOVEMENT ###
 	var horizontal_dir = Input.get_axis("left", "right")
@@ -107,7 +115,7 @@ func movement(delta : float):
 		shoot_dir = -1
 	
 	### JUMP ### 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and !on_ladder:
 		if is_on_floor() or coyote_active:
 			velocity.y = jump_velocity
 			coyote_active = false
@@ -123,6 +131,15 @@ func movement(delta : float):
 		coyote_timer_node.start()
 	if is_on_floor():
 		can_coyote = true
+	
+	### LADDER MOVEMENT ###
+	if on_ladder:
+		if Input.is_action_pressed("ladder_up"):
+			velocity.y = -speed
+		elif Input.is_action_pressed("ladder_down"):
+			velocity.y = speed
+		else:
+			velocity.y = 0
 
 func animation():
 	if !hurt_anim: #only runs when player isn't hurt
@@ -151,13 +168,17 @@ func attack():
 	else:
 		red_bar_node.visible = false
 
-func update_coins():
+func update_coins_keys():
 	coins = unsaved_coins + saved_coins
 	coin_count_node.text = "%02d" % coins
+	keys = unsaved_keys + saved_keys
+	key_count_node.text= "%02d" % keys
 
-func save_coins():
+func save_coins_keys():
 	saved_coins += unsaved_coins
 	unsaved_coins = 0
+	saved_keys += unsaved_keys
+	unsaved_keys = 0
 
 func respawn():
 	### GLOBAL RESPAWN ###
@@ -165,6 +186,7 @@ func respawn():
 	### RESET VARIABLES ###
 	health = lives
 	unsaved_coins = 0
+	unsaved_keys = 0
 	hurt_anim = false
 	
 	### RESET GLOBAL POSITION ###

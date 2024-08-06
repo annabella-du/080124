@@ -7,10 +7,6 @@ extends Area2D
 @onready var animation_node = $AnimationPlayer
 @onready var activate_light_node = $ActivateLight
 
-### TEXTURES ###
-@export var unused_flag_texture : Texture2D
-@export var used_flag_texture : Texture2D
-
 ### VARIABLES ###
 var can_activate = false
 var active = false
@@ -19,7 +15,6 @@ var used := false
 ### BUILT IN FUNCTIONS ###
 func _ready():
 	global.connect("respawn_signal", _on_global_respawn)
-	sprite_node.texture = unused_flag_texture
 	activate_light_node.visible = false
 
 func _input(event):
@@ -31,7 +26,6 @@ func activate():
 	animation_node.play("active")
 	if !used:
 		used = true
-		sprite_node.texture = used_flag_texture
 		player_node.health = player_node.lives
 	if global.active_checkpoint != null:
 		global.active_checkpoint.deactivate()
@@ -58,4 +52,3 @@ func _on_area_exited(area):
 ### CUSTOM SIGNAL FUNCTIONS ###
 func _on_global_respawn():
 	used = false
-	sprite_node.texture = unused_flag_texture
