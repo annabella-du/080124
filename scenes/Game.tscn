@@ -341,7 +341,9 @@ energy = 1.25
 blend_mode = 1
 
 [node name="PotionsParent" parent="." instance=ExtResource("5_4xxi6")]
-unique_name_in_owner = true
+
+[node name="InitialPos" type="Node2D" parent="." groups=["initial_pos"]]
+position = Vector2(120, -7)
 
 [node name="Enemies" type="Node2D" parent="."]
 

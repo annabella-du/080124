@@ -3,6 +3,7 @@ extends CharacterBody2D
 ### SPRITE NODES ###
 @onready var sprite_node = $Sprite2D
 @onready var animation_node = $AnimationPlayer
+@onready var initial_pos_node = get_tree().get_first_node_in_group("initial_pos")
 
 ### CANVAS LAYERS ###
 @onready var heart_layer_node = $HeartLayer
@@ -18,6 +19,7 @@ extends CharacterBody2D
 ### OTHER NODES ###
 @onready var coyote_timer_node = $CoyoteTimer
 @onready var dark_lighting_node = $DarkLighting
+@onready var respawn_cooldown_node = $RespawnCooldown
 
 ### BASIC MOVEMENT VARIABLES ###
 @export var speed := 95.0
@@ -37,8 +39,8 @@ var coyote_active := false
 var can_coyote := false
 
 ### HEALTH VARIABLES ###
-@export var health := 3
-var dead := false
+@export var lives := 3
+@onready var health = lives
 
 ### ATTACK VARIABLES ###
 @export var potion : Resource
@@ -70,7 +72,6 @@ func _ready():
 	cooldown_bar_node.max_value = attack_cooldown_node.wait_time
 	cooldown_bar_node.value = cooldown_bar_node.max_value
 	coyote_timer_node.wait_time = coyote_time
-	heart_layer_node.health = health
 
 func _physics_process(delta):
 	if !paused: #nothing happens when paused
@@ -154,18 +155,35 @@ func update_coins():
 	coins = unsaved_coins + saved_coins
 	coin_count_node.text = "%02d" % coins
 
+func save_coins():
+	saved_coins += unsaved_coins
+	unsaved_coins = 0
+
+func respawn():
+	### GLOBAL RESPAWN ###
+	global.respawn()
+	### RESET VARIABLES ###
+	health = lives
+	unsaved_coins = 0
+	hurt_anim = false
+	
+	### RESET GLOBAL POSITION ###
+	if global.active_checkpoint == null:
+		global_position = initial_pos_node.global_position
+	else:
+		global_position = global.active_checkpoint.global_position
+		global_position.y += 6
+
 ### AREA2D FUNCTIONS###
 func _on_hurt_box_area_entered(area):
 	if area.is_in_group("enemy"):
 		hurt_anim = true
 		health -= 1
-		heart_layer_node.health -= 1 #NEED TO CHANGE
 		if health != 0: #not dead
 			animation_node.play("hurt")
 		else: #dead
-			global.pause_func()
-			dead = true
 			animation_node.play("die")
+			respawn_cooldown_node.start()
 
 func _on_coin_detection_area_entered(area):
 	if area.is_in_group("coin"):
@@ -186,6 +204,9 @@ func _on_coyote_timer_timeout():
 func _on_attack_cooldown_timeout():
 	can_attack = true
 
+func _on_respawn_cooldown_timeout():
+	respawn()
+
 ### CUSTOM SIGNAL FUNCTIONS ###
 func _on_global_pause(): #connected from global signal
 	paused = true
@@ -199,6 +220,4 @@ func _on_global_unpause(): #connected from global signal
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurt_anim = false
-	elif anim_name == "die":
-		global.died()
 

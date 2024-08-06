@@ -7,6 +7,7 @@ extends Node
 @onready var dark_nodes = get_tree().get_nodes_in_group("dark")
 @onready var light_nodes = get_tree().get_nodes_in_group("light")
 @onready var lever_nodes = get_tree().get_nodes_in_group("lever")
+@onready var coin_nodes = get_tree().get_nodes_in_group("coin")
 
 ### VARIABLES ###
 var light_active := true
@@ -23,11 +24,24 @@ func _input(event):
 	### PAUSE AND UNPAUSE ###
 	if event.is_action_pressed("pause") and !player_node.dead:
 		if !paused:
-			pause_signal.emit()
-			paused = true
+			pause_func()
 		else:
-			unpause_signal.emit()
-			paused = false
+			unpause_func()
+
+### CUSTOM FUNCTIONS
+func respawn():
+	### EMIT SIGNAL ###
+	respawn_signal.emit()
+	### RESPAWN COINS ###
+	for coin in coin_nodes:
+		if !coin.collected:
+			coin.respawn()
+
+func save():
+	player_node.save_coins()
+	for coin in coin_nodes:
+		if coin.collected:
+			coin.saved = true
 
 ### LIGHTING FUNCTIONS ###
 func light_on():
@@ -50,9 +64,11 @@ func light_off():
 	for lever in lever_nodes:
 		lever.off()
 
-### EMIT SIGNAL FUNCTIONS ###
-func died():
-	respawn_signal.emit()
-
+### PAUSE FUNCTIONS ###
 func pause_func():
 	pause_signal.emit()
+	paused = true
+
+func unpause_func():
+	unpause_signal.emit()
+	paused = false

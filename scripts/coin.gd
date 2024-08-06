@@ -14,7 +14,7 @@ extends Area2D
 enum status {hidden, transparent, regular}
 var current_status : status = status.hidden
 var collected = false
-var saved = false
+var saved = false #changed to true only with global function
 
 ### BUILT IN FUNCTIONS ###
 func _ready():
@@ -27,6 +27,13 @@ func _physics_process(_delta):
 		transparent()
 
 ### CUSTOM FUNCTIONS ###
+func save():
+	saved = true
+
+func respawn():
+	hidden()
+	collected = false
+
 func hidden():
 	sprite.visible = false
 	current_status = status.hidden

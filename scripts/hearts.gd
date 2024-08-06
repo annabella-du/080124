@@ -1,12 +1,10 @@
 extends CanvasLayer
 
 ### NODES ###
+@onready var player = get_parent()
 @onready var heart1 = $Heart1
 @onready var heart2 = $Heart2
 @onready var heart3 = $Heart3
-
-### VARIABLES ###
-var health : int
 
 ### BUILT IN FUNCTIONS ###
 func _ready():
@@ -15,7 +13,7 @@ func _ready():
 	heart3.visible = true
 
 func _physics_process(_delta):
-	match health:
+	match player.health:
 		3:
 			heart1.visible = false
 			heart2.visible = false
