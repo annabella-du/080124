@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4nwu3mw6c5hb"]
+[gd_scene load_steps=26 format=3 uid="uid://c4nwu3mw6c5hb"]
 
 [ext_resource type="Texture2D" uid="uid://cmctp54qj2jvk" path="res://assets/camelot_ [version 1.0]/lancelot_.png" id="1_b5rin"]
 [ext_resource type="Script" path="res://scripts/knight_patrol.gd" id="1_epjps"]
@@ -7,12 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c6u8voikexr6" path="res://assets/Custom Assets/light1.png" id="4_2d15m"]
 [ext_resource type="Texture2D" uid="uid://0sxqkwiexbcq" path="res://assets/Custom Assets/alarm_red.png" id="6_nwyc7"]
 [ext_resource type="Texture2D" uid="uid://dwejobi5tcoon" path="res://assets/Custom Assets/alarm_yellow.png" id="7_ij82n"]
-[ext_resource type="Script" path="res://scripts/enemy_hurtbox.gd" id="8_3bkpr"]
 [ext_resource type="Texture2D" uid="uid://bf471v27mcas" path="res://assets/Custom Assets/torch_red.png" id="9_6plv8"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
-radius = 4.0
-height = 14.0
 
 [sub_resource type="Animation" id="Animation_ei2pk"]
 length = 0.001
@@ -86,6 +81,10 @@ _data = {
 "idle": SubResource("Animation_870kh"),
 "run": SubResource("Animation_qplud")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b0rh1"]
+radius = 4.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_305q6"]
 radius = 9.0
@@ -163,9 +162,14 @@ texture = ExtResource("1_b5rin")
 hframes = 8
 vframes = 10
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight"]
-position = Vector2(0, 4)
-shape = SubResource("CapsuleShape2D_b0rh1")
+[node name="AlarmRed" type="Sprite2D" parent="Knight"]
+z_index = 1
+position = Vector2(0, -14)
+texture = ExtResource("6_nwyc7")
+
+[node name="AlarmYellow" type="Sprite2D" parent="Knight"]
+position = Vector2(0, -14)
+texture = ExtResource("7_ij82n")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Knight"]
 root_node = NodePath("../..")
@@ -173,6 +177,16 @@ libraries = {
 "": SubResource("AnimationLibrary_i4tbw")
 }
 autoplay = "idle"
+
+[node name="PointLight2D" type="PointLight2D" parent="Knight"]
+position = Vector2(29, 0)
+color = Color(0.305882, 0.356863, 0.192157, 1)
+energy = 0.8
+texture = ExtResource("4_2d15m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Knight"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_b0rh1")
 
 [node name="Sword" parent="Knight" instance=ExtResource("3_b1dr1")]
 position = Vector2(10, 9)
@@ -195,29 +209,13 @@ position = Vector2(11, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nmdje")
 
-[node name="PointLight2D" type="PointLight2D" parent="Knight"]
-position = Vector2(29, 0)
-color = Color(0.305882, 0.356863, 0.192157, 1)
-energy = 0.8
-texture = ExtResource("4_2d15m")
-
-[node name="PatrolTimer" type="Timer" parent="Knight"]
-
-[node name="AlarmRed" type="Sprite2D" parent="Knight"]
-z_index = 1
-position = Vector2(0, -14)
-texture = ExtResource("6_nwyc7")
-
-[node name="AlarmYellow" type="Sprite2D" parent="Knight"]
-position = Vector2(0, -14)
-texture = ExtResource("7_ij82n")
-
 [node name="HurtBox" type="Area2D" parent="Knight" groups=["enemy"]]
-script = ExtResource("8_3bkpr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Knight/HurtBox"]
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_6ckxp")
+
+[node name="PatrolTimer" type="Timer" parent="Knight"]
 
 [node name="LeftPatrol" type="Node2D" parent="."]
 z_index = -1

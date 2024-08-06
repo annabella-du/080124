@@ -1,15 +1,22 @@
 extends Area2D
 
+### GLOBAL ###
 @onready var global = get_node("/root/global")
-@export var regular_texture : Texture2D 
-@export var transparent_texture : Texture2D
+
+### SPRITE NODES ###
 @onready var sprite = $Sprite2D
 
+### TEXTURES ###
+@export var regular_texture : Texture2D 
+@export var transparent_texture : Texture2D
+
+### VARIABLES ###
 enum status {hidden, transparent, regular}
 var current_status : status = status.hidden
 var collected = false
 var saved = false
 
+### BUILT IN FUNCTIONS ###
 func _ready():
 	hidden()
 
@@ -19,6 +26,7 @@ func _physics_process(_delta):
 	elif current_status == status.regular and !global.light_active:
 		transparent()
 
+### CUSTOM FUNCTIONS ###
 func hidden():
 	sprite.visible = false
 	current_status = status.hidden

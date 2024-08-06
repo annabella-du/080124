@@ -1,11 +1,14 @@
 extends CanvasLayer
 
+### NODES ###
 @onready var heart1 = $Heart1
 @onready var heart2 = $Heart2
 @onready var heart3 = $Heart3
 
+### VARIABLES ###
 var health : int
 
+### BUILT IN FUNCTIONS ###
 func _ready():
 	heart1.visible = true
 	heart2.visible = true

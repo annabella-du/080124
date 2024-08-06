@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-### BASIC NODES ###
+### SPRITE NODES ###
 @onready var sprite_node = $Sprite2D
 @onready var animation_node = $AnimationPlayer
 
@@ -63,11 +63,9 @@ func _ready():
 	### CONNECT SIGNALS ###
 	global.connect("pause_signal", _on_global_pause)
 	global.connect("unpause_signal", _on_global_unpause)
-	
 	### SET VISIBILITIES ###
 	dark_lighting_node.visible = false
 	red_bar_node.visible = false
-	
 	### SET INITIAL VALUES ###
 	cooldown_bar_node.max_value = attack_cooldown_node.wait_time
 	cooldown_bar_node.value = cooldown_bar_node.max_value
@@ -82,7 +80,7 @@ func _physics_process(delta):
 		update_coins()
 		move_and_slide() #DON'T DELETE THIS
 
-### PHYSICS PROCESS FUNCTIONS ###
+### CUSTOM FUNCTIONS ###
 func movement(delta : float):
 	### GRAVITY
 	if velocity.y < 0: #jumping
