@@ -18,5 +18,9 @@ func _on_area_entered(area):
 	if area.is_in_group("enemy"):
 		area.get_parent().hurt_func()
 		queue_free()
-	elif area.is_in_group("wall"):
+
+func _on_body_entered(body):
+	if body.name == "TileMap":
+		queue_free()
+	elif "Gate" in body.name:
 		queue_free()

@@ -9,6 +9,7 @@ extends Node
 @onready var lever_nodes = get_tree().get_nodes_in_group("lever")
 @onready var coin_nodes = get_tree().get_nodes_in_group("coin")
 @onready var chest_nodes = get_tree().get_nodes_in_group("chest")
+@onready var gate_nodes = get_tree().get_nodes_in_group("gate")
 
 ### VARIABLES ###
 var light_active := true
@@ -33,13 +34,18 @@ func _input(event):
 func respawn():
 	### EMIT SIGNAL ###
 	respawn_signal.emit()
-	### RESPAWN COINS AND CHESTS ###
+	### RESPAWN COINS ###
 	for coin in coin_nodes:
 		if !coin.collected:
 			coin.respawn()
+	### RESPAWN CHESTS ###
 	for chest in chest_nodes:
 		if !chest.saved:
 			chest.respawn()
+	### RESPAWN GATES ###
+	for gate in gate_nodes:
+		if !gate.saved:
+			gate.respawn()
 	### RESET LIGHTING ###
 	light_on()
 
@@ -51,6 +57,9 @@ func save():
 	for chest in chest_nodes:
 		if chest.opened:
 			chest.saved = true
+	for gate in gate_nodes:
+		if gate.opened:
+			gate.saved = true
 
 ### LIGHTING FUNCTIONS ###
 func light_on():

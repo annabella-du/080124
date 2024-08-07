@@ -191,12 +191,22 @@ func save_coins_keys():
 		blue_key_saved = true
 
 func pickup_key(key : int):
-	if key == 0:
-		red_key = true
-	elif key == 1:
-		green_key = true
-	elif key == 2:
-		blue_key = true
+	match key:
+		0: red_key = true
+		1: green_key = true
+		2: blue_key = true
+
+func open_gate(gate : int):
+	match gate:
+		0:
+			red_key = false
+			red_key_saved = false
+		1:
+			green_key = false
+			green_key_saved = false
+		2:
+			blue_key = false
+			blue_key_saved = false
 
 func respawn():
 	### GLOBAL RESPAWN ###

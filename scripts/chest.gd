@@ -1,7 +1,6 @@
 extends Area2D
 
 ### NODES ###
-@onready var global = get_node("/root/global")
 @onready var player_node = get_tree().get_first_node_in_group("player")
 @onready var animation_node = $AnimationPlayer
 @onready var activate_light_node = $ActivateLight

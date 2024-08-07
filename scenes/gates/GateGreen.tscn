@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c24dn1t14rfdc"]
+[gd_scene load_steps=7 format=3 uid="uid://c0hhg1ysg1ers"]
 
-[ext_resource type="Script" path="res://scripts/gate.gd" id="1_e7b8w"]
-[ext_resource type="Texture2D" uid="uid://buwewf81jlkdk" path="res://assets/custom assets/gates/gate_red.png" id="1_kr6ca"]
+[ext_resource type="Script" path="res://scripts/gate.gd" id="1_slcxk"]
+[ext_resource type="Texture2D" uid="uid://dnt5mmmtoufjm" path="res://assets/custom assets/gates/gate_green.png" id="2_fpvv7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5ebkd"]
 size = Vector2(16, 32)
@@ -20,12 +20,13 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_f1p7y"]
 radius = 24.0
 
-[node name="GateRed" type="StaticBody2D" groups=["gate"]]
+[node name="GateGreen" type="StaticBody2D" groups=["gate"]]
 collision_mask = 6
-script = ExtResource("1_e7b8w")
+script = ExtResource("1_slcxk")
+gate_color = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_kr6ca")
+texture = ExtResource("2_fpvv7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5ebkd")
