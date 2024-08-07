@@ -1,15 +1,17 @@
-[gd_scene load_steps=17 format=3 uid="uid://do35cdniy37m4"]
+[gd_scene load_steps=19 format=3 uid="uid://do35cdniy37m4"]
 
 [ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_oghll"]
 [ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="2_hyg3h"]
-[ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/KnightRed.tscn" id="3_sqlxg"]
-[ext_resource type="Texture2D" uid="uid://xigm5cetvuxp" path="res://assets/Custom Assets/background.png" id="4_ir0q4"]
+[ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/knights/KnightRed.tscn" id="3_sqlxg"]
+[ext_resource type="Texture2D" uid="uid://xigm5cetvuxp" path="res://assets/custom assets/background.png" id="4_ir0q4"]
 [ext_resource type="PackedScene" uid="uid://dj4bxfjs0mv7i" path="res://scenes/PotionsParent.tscn" id="5_4xxi6"]
 [ext_resource type="PackedScene" uid="uid://dv6yheno2uweb" path="res://scenes/Lever.tscn" id="6_p3spf"]
 [ext_resource type="PackedScene" uid="uid://d33lsavhyihrv" path="res://scenes/Coin.tscn" id="7_qv3rq"]
 [ext_resource type="PackedScene" uid="uid://b748ybyc2uamd" path="res://scenes/Ladder.tscn" id="9_s806n"]
 [ext_resource type="PackedScene" uid="uid://5t1igw4r8b7o" path="res://scenes/Checkpoint.tscn" id="9_sn8l4"]
-[ext_resource type="PackedScene" uid="uid://cvyntvc5a28f1" path="res://scenes/Chest.tscn" id="10_7ngch"]
+[ext_resource type="PackedScene" uid="uid://t5jxx1cpbpkw" path="res://scenes/chests/ChestBlue.tscn" id="10_uwhy1"]
+[ext_resource type="PackedScene" uid="uid://clctep8pf5a7r" path="res://scenes/chests/ChestGreen.tscn" id="11_e5sub"]
+[ext_resource type="PackedScene" uid="uid://cvyntvc5a28f1" path="res://scenes/chests/ChestRed.tscn" id="12_6oy1v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8735"]
 texture = ExtResource("1_oghll")
@@ -340,6 +342,7 @@ position = Vector2(0, 5)
 zoom = Vector2(3, 3)
 
 [node name="BackgroundLighting" type="DirectionalLight2D" parent="." groups=["light"]]
+visible = false
 color = Color(0.666569, 0.666569, 0.666569, 1)
 blend_mode = 1
 
@@ -350,7 +353,6 @@ energy = 1.25
 blend_mode = 1
 
 [node name="PotionsParent" parent="." instance=ExtResource("5_4xxi6")]
-visible = false
 
 [node name="InitialPos" type="Node2D" parent="." groups=["initial_pos"]]
 position = Vector2(120, -7)
@@ -397,5 +399,11 @@ shape = SubResource("RectangleShape2D_o1fug")
 
 [node name="Chests" type="Node2D" parent="."]
 
-[node name="Chest" parent="Chests" instance=ExtResource("10_7ngch")]
-position = Vector2(216, -8)
+[node name="ChestBlue" parent="Chests" instance=ExtResource("10_uwhy1")]
+position = Vector2(300, -9)
+
+[node name="ChestRed" parent="Chests" instance=ExtResource("11_e5sub")]
+position = Vector2(254, -7)
+
+[node name="ChestRed2" parent="Chests" instance=ExtResource("12_6oy1v")]
+position = Vector2(205, -7)

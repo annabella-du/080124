@@ -1,10 +1,15 @@
 extends Area2D
 
+@onready var sprite = $Sprite2D
+
 ### VARIABLES ###
 @export var speed := 160.0
 var dir := -1
 
 ### BUILT IN FUNCTIONS ###
+func _ready():
+	sprite.visible = true
+
 func _physics_process(delta):
 	global_position.x += speed * dir * delta
 

@@ -9,8 +9,10 @@ extends CharacterBody2D
 @onready var heart_layer_node = $HeartLayer
 @onready var cooldown_bar_node = %CooldownBar
 @onready var coin_count_node = %CoinCount
-@onready var key_count_node = %KeyCount
 @onready var red_bar_node = $CanvasLayer/RedBar
+@onready var red_key_node = %RedKey
+@onready var green_key_node = %GreenKey
+@onready var blue_key_node = %BlueKey
 
 ### ATTACK NODES ###
 @onready var shoot_point_node = $ShootPoint
@@ -55,9 +57,12 @@ var saved_coins := 0
 var unsaved_coins := 0
 
 ### KEY VARIABLES ###
-var keys := 0 #don't directly change this
-var saved_keys := 0
-var unsaved_keys := 0
+var red_key := false
+var red_key_saved := false
+var green_key := false
+var green_key_saved := false
+var blue_key := false
+var blue_key_saved := false
 
 ### OTHER VARIABLES ###
 var paused := false
@@ -171,14 +176,19 @@ func attack():
 func update_coins_keys():
 	coins = unsaved_coins + saved_coins
 	coin_count_node.text = "%02d" % coins
-	keys = unsaved_keys + saved_keys
-	key_count_node.text= "%02d" % keys
+	red_key_node.visible = red_key
+	green_key_node.visible = green_key
+	blue_key_node.visible = blue_key
 
 func save_coins_keys():
 	saved_coins += unsaved_coins
 	unsaved_coins = 0
-	saved_keys += unsaved_keys
-	unsaved_keys = 0
+	if red_key:
+		red_key_saved = true
+	if green_key:
+		green_key_saved = true
+	if blue_key:
+		blue_key_saved = true
 
 func respawn():
 	### GLOBAL RESPAWN ###
@@ -186,7 +196,6 @@ func respawn():
 	### RESET VARIABLES ###
 	health = lives
 	unsaved_coins = 0
-	unsaved_keys = 0
 	hurt_anim = false
 	
 	### RESET GLOBAL POSITION ###

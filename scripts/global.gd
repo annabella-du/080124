@@ -38,7 +38,7 @@ func respawn():
 		if !coin.collected:
 			coin.respawn()
 	for chest in chest_nodes:
-		if !chest.collected:
+		if !chest.saved:
 			chest.respawn()
 	### RESET LIGHTING ###
 	light_on()
@@ -49,7 +49,7 @@ func save():
 		if coin.collected:
 			coin.saved = true
 	for chest in chest_nodes:
-		if chest.open:
+		if chest.opened:
 			chest.saved = true
 
 ### LIGHTING FUNCTIONS ###

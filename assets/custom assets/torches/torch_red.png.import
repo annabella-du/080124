@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xigm5cetvuxp"
-path="res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"
+uid="uid://bf471v27mcas"
+path="res://.godot/imported/torch_red.png-30bfab03d6538963a4f48b1de606a54d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/custom assets/background.png"
-dest_files=["res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"]
+source_file="res://assets/custom assets/torches/torch_red.png"
+dest_files=["res://.godot/imported/torch_red.png-30bfab03d6538963a4f48b1de606a54d.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://d33lsavhyihrv"]
 
 [ext_resource type="Script" path="res://scripts/coin.gd" id="1_xlx7f"]
-[ext_resource type="Texture2D" uid="uid://ckvri2r0c0k1x" path="res://assets/Custom Assets/coin.png" id="2_flccf"]
-[ext_resource type="Texture2D" uid="uid://b08sakgqta87q" path="res://assets/Custom Assets/coin_transparent.png" id="3_8sxi8"]
+[ext_resource type="Texture2D" uid="uid://ckvri2r0c0k1x" path="res://assets/custom assets/coins/coin.png" id="2_flccf"]
+[ext_resource type="Texture2D" uid="uid://b08sakgqta87q" path="res://assets/custom assets/coins/coin_transparent.png" id="3_8sxi8"]
 
 [sub_resource type="Animation" id="Animation_0xt6d"]
 length = 0.001

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xigm5cetvuxp"
-path="res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"
+uid="uid://bejyiswoukfcw"
+path="res://.godot/imported/chest_green.png-39a45b538f14e3ae10800962bc09245e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/custom assets/background.png"
-dest_files=["res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"]
+source_file="res://assets/custom assets/chests/chest_green.png"
+dest_files=["res://.godot/imported/chest_green.png-39a45b538f14e3ae10800962bc09245e.ctex"]
 
 [params]
 

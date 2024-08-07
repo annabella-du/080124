@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://5t1igw4r8b7o"]
 
 [ext_resource type="Script" path="res://scripts/checkpoint.gd" id="1_hdahn"]
-[ext_resource type="Texture2D" uid="uid://d2f0ut780biv0" path="res://assets/Custom Assets/flag_unused.png" id="2_f3xfd"]
+[ext_resource type="Texture2D" uid="uid://d2f0ut780biv0" path="res://assets/custom assets/flags/flag_unused.png" id="2_nre4v"]
 
 [sub_resource type="Animation" id="Animation_w7mic"]
 length = 0.001
@@ -79,7 +79,7 @@ collision_mask = 2
 script = ExtResource("1_hdahn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_f3xfd")
+texture = ExtResource("2_nre4v")
 hframes = 4
 vframes = 2
 

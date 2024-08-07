@@ -23,15 +23,18 @@ func _input(event):
 
 ### CUSTOM FUNCTIONS ###
 func activate():
+	active = true
 	animation_node.play("active")
+	activate_light_node.visible = false
+	### HEALING PLAYER ###
 	if !used:
 		used = true
 		player_node.health = player_node.lives
+	### GLOBAL ###
 	if global.active_checkpoint != null:
 		global.active_checkpoint.deactivate()
 	global.active_checkpoint = self
 	global.save()
-	active = true
 
 func deactivate():
 	animation_node.play("inactive")
@@ -40,8 +43,8 @@ func deactivate():
 ### AREA2D FUNCTIONS ###
 func _on_area_entered(area):
 	if area.is_in_group("player"):
-		activate_light_node.visible = true
 		if !active:
+			activate_light_node.visible = true
 			can_activate = true
 
 func _on_area_exited(area):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://dv6yheno2uweb"]
 
-[ext_resource type="Texture2D" uid="uid://d38y51qdjpamb" path="res://assets/Custom Assets/lever.png" id="1_ckdu5"]
+[ext_resource type="Texture2D" uid="uid://d38y51qdjpamb" path="res://assets/custom assets/lever.png" id="1_ckdu5"]
 [ext_resource type="Script" path="res://scripts/lever.gd" id="1_ijmh2"]
 
 [sub_resource type="Animation" id="Animation_p2o8c"]

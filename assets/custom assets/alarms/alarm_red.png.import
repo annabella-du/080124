@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xigm5cetvuxp"
-path="res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"
+uid="uid://0sxqkwiexbcq"
+path="res://.godot/imported/alarm_red.png-3365868adb2ca110f40c42c4d022e940.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/custom assets/background.png"
-dest_files=["res://.godot/imported/background.png-a0b6ff8784da272a4bc998ac4249463e.ctex"]
+source_file="res://assets/custom assets/alarms/alarm_red.png"
+dest_files=["res://.godot/imported/alarm_red.png-3365868adb2ca110f40c42c4d022e940.ctex"]
 
 [params]
 
