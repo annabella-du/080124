@@ -22,8 +22,7 @@ func _physics_process(_delta):
 		opened = true
 		activate_light_node.visible = false
 		animation_node.play("open")
-		
-		#player_node.unsaved_keys += 1
+		player_node.pickup_key(chest_color)
 
 ### CUSTOM FUNCTIONS ###
 func respawn():

@@ -190,6 +190,14 @@ func save_coins_keys():
 	if blue_key:
 		blue_key_saved = true
 
+func pickup_key(key : int):
+	if key == 0:
+		red_key = true
+	elif key == 1:
+		green_key = true
+	elif key == 2:
+		blue_key = true
+
 func respawn():
 	### GLOBAL RESPAWN ###
 	global.respawn()
@@ -197,7 +205,13 @@ func respawn():
 	health = lives
 	unsaved_coins = 0
 	hurt_anim = false
-	
+	### RESET KEY VARIABLES ###
+	if !red_key_saved:
+		red_key = false
+	if !green_key_saved:
+		green_key = false
+	if !blue_key_saved:
+		blue_key = false
 	### RESET GLOBAL POSITION ###
 	if global.active_checkpoint == null:
 		global_position = initial_pos_node.global_position

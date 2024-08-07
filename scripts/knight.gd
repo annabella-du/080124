@@ -64,7 +64,9 @@ func movement():
 		velocity.x = 0
 	
 	elif player != null: #player is detected; restrict movement to patrol area
-		if global_position.x <= left_patrol or global_position.x >= right_patrol: 
+		if global_position.x <= left_patrol and global_position.x > player.global_position.x: 
+			player = null
+		elif global_position.x >= right_patrol and global_position.x < player.global_position.x:
 			player = null
 		elif player.global_position.x > global_position.x: #facing right
 			velocity.x = chase_speed

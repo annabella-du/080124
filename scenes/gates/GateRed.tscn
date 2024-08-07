@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c24dn1t14rfdc"]
+
+[ext_resource type="Texture2D" uid="uid://buwewf81jlkdk" path="res://assets/custom assets/gates/gate_red.png" id="1_kr6ca"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ebkd"]
+size = Vector2(16, 32)
+
+[sub_resource type="Gradient" id="Gradient_jcnx6"]
+offsets = PackedFloat32Array(0, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uhmrx"]
+gradient = SubResource("Gradient_jcnx6")
+width = 60
+height = 60
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="GateRed" type="StaticBody2D"]
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kr6ca")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5ebkd")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.305882, 0.356863, 0.192157, 1)
+texture = SubResource("GradientTexture2D_uhmrx")
