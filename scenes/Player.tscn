@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://pq78si5i6rpk" path="res://assets/custom assets/hearts/Heart2.png" id="9_omipf"]
 [ext_resource type="Texture2D" uid="uid://dq7ipngxg45bj" path="res://assets/custom assets/keys/key_background.png" id="9_p6k27"]
 [ext_resource type="Texture2D" uid="uid://dct1cq34743" path="res://assets/custom assets/hearts/Heart3.png" id="10_0jq0o"]
-[ext_resource type="LabelSettings" uid="uid://p1t4pneeld7x" path="res://assets/label_settings.tres" id="10_8gol1"]
+[ext_resource type="LabelSettings" uid="uid://p1t4pneeld7x" path="res://assets/canvas_label_settings.tres" id="10_8gol1"]
 
 [sub_resource type="Animation" id="Animation_ucg6u"]
 length = 0.001

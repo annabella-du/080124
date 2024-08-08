@@ -3,7 +3,14 @@ extends Node
 """
 To-do:
 	level design
+		camera limits
 		tutorial level
+			movement
+			ladder
+			enemies/stun
+			checkpoints
+			coins/levers
+			chests/keys/gates
 		1-2 levels
 		global switch scene function
 	basic ui
@@ -11,6 +18,9 @@ To-do:
 		pause menu
 		level select menu
 		credits
+	fix player appear animation height
+	make more detailed levels (esp tutorial lvl)
+	pickup hearts
 Future ideas:
 	teleport
 	cranks (linked system)

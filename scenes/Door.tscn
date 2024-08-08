@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dm2ij4du08bu1"]
+[gd_scene load_steps=12 format=3 uid="uid://dm2ij4du08bu1"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_rkat4"]
 [ext_resource type="Texture2D" uid="uid://lap0wph7cchm" path="res://assets/custom assets/door.png" id="2_d4keq"]
 [ext_resource type="FontFile" uid="uid://do7rqgojjbhfr" path="res://assets/custom assets/PixelOperator8.ttf" id="3_nuk06"]
+[ext_resource type="LabelSettings" uid="uid://bajqfgwtph3ti" path="res://assets/text_settings.tres" id="4_ko4dj"]
 
 [sub_resource type="Animation" id="Animation_3v151"]
 length = 0.001
@@ -106,9 +107,11 @@ offset_right = 52.0
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.929412, 0.894118, 0.854902, 1)
 theme_override_fonts/font = ExtResource("3_nuk06")
 theme_override_font_sizes/font_size = 8
 text = "XXX Coins to Exit"
+label_settings = ExtResource("4_ko4dj")
 horizontal_alignment = 1
 vertical_alignment = 1
 

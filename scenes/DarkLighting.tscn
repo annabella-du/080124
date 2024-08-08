@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c6me2wma1cfkv"]
+
+[node name="DarkLighting" type="DirectionalLight2D" groups=["dark"]]
+visible = false
+z_index = -10
+energy = 1.25
+blend_mode = 1

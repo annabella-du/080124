@@ -1,6 +1,137 @@
-[gd_scene format=3 uid="uid://b43mw80505yde"]
+[gd_scene load_steps=13 format=3 uid="uid://b43mw80505yde"]
+
+[ext_resource type="TileSet" uid="uid://ix58q632brfn" path="res://assets/tileset.tres" id="1_l2hh6"]
+[ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="3_q576y"]
+[ext_resource type="PackedScene" uid="uid://cfa3q6mifqjnm" path="res://scenes/Camera.tscn" id="3_wi242"]
+[ext_resource type="PackedScene" uid="uid://dxfsvkh854nle" path="res://scenes/BackgroundLighting.tscn" id="4_da4cc"]
+[ext_resource type="PackedScene" uid="uid://c6me2wma1cfkv" path="res://scenes/DarkLighting.tscn" id="5_3ic5c"]
+[ext_resource type="PackedScene" uid="uid://bxou44diy0ov" path="res://scenes/knights/KnightBlue.tscn" id="5_amwwm"]
+[ext_resource type="PackedScene" uid="uid://cebw2v5pxf384" path="res://scenes/InitialPos.tscn" id="6_ql085"]
+[ext_resource type="LabelSettings" uid="uid://bajqfgwtph3ti" path="res://assets/text_settings.tres" id="7_nps6l"]
+[ext_resource type="PackedScene" uid="uid://cowcvxc7wmdnn" path="res://scenes/knights/KnightGreen.tscn" id="8_orh2w"]
+[ext_resource type="PackedScene" uid="uid://b748ybyc2uamd" path="res://scenes/Ladder.tscn" id="9_uakde"]
+[ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/knights/KnightRed.tscn" id="10_ip5bs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mwa2o"]
+size = Vector2(16, 160)
 
 [node name="Level1" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_l2hh6")
 format = 2
+layer_0/name = "ground/walls"
+layer_0/tile_data = PackedInt32Array(0, 393216, 7, 1, 393216, 7, 2, 393216, 7, 3, 393216, 7, 4, 393216, 7, 5, 393216, 7, 6, 393216, 7, 7, 393216, 7, 8, 393216, 7, 9, 393216, 7, 10, 393216, 7, 11, 393216, 7, 12, 393216, 7, 13, 393216, 7, 14, 393216, 7, 15, 393216, 7, 16, 393216, 7, 17, 393216, 7, 18, 393216, 7, 19, 393216, 7, 20, 393216, 7, 65535, 393216, 7, 65534, 393216, 7, 65533, 393216, 7, 65532, 393216, 7, 65531, 393216, 7, 65530, 327680, 7, -65527, 262144, 1, -65526, 262144, 1, -65525, 262144, 1, -65524, 262144, 1, -65523, 262144, 1, -65522, 262144, 1, -65516, 262144, 1, -65517, 262144, 1, -65518, 262144, 1, -65519, 262144, 1, -65520, 262144, 1, -65521, 262144, 1, 21, 393216, 7, 22, 393216, 7, 23, 393216, 7, 24, 393216, 7, 25, 393216, 7, 26, 393216, 7, 27, 393216, 7, 28, 393216, 7, 29, 393216, 7, 30, 393216, 7, 31, 393216, 7, 32, 393216, 7, 33, 393216, 7, 34, 393216, 7, -131048, 262144, 1, -131047, 262144, 1, -131046, 262144, 1, -131045, 262144, 1, -131044, 262144, 1, -65508, 262144, 1, -65509, 262144, 1, -65510, 262144, 1, -65511, 262144, 1, -65512, 262144, 1, -65513, 262144, 1, -65514, 262144, 1, -65515, 262144, 1, -196584, 262144, 1, -196583, 262144, 1, -196582, 262144, 1, -196581, 262144, 1, -196580, 262144, 1, -65528, 262144, 1, -65529, 262144, 1, -196579, 262144, 1, -196578, 262144, 1, -196577, 262144, 1, -196576, 262144, 1, -196575, 262144, 1, -196574, 262144, 1, -65502, 262144, 1, -65503, 262144, 1, -65504, 262144, 1, -65505, 262144, 1, -65506, 262144, 1, -65507, 262144, 1, -131043, 262144, 1, -131042, 262144, 1, -131041, 262144, 1, -131040, 262144, 1, -131039, 262144, 1, -131038, 262144, 1, -262112, 262144, 1, -262111, 262144, 1, -262110, 262144, 1, -786387, 0, 8, -786386, 327680, 7, -786385, 393216, 7, -786384, 393216, 7, -786383, 393216, 7, -786382, 393216, 7, -786381, 393216, 7, -786380, 393216, 7, -786379, 393216, 7, -786378, 393216, 7, -786377, 393216, 7, -786376, 393216, 7, -786375, 393216, 7, -786374, 393216, 7, -786373, 393216, 7, -786372, 393216, 7, -786371, 393216, 7, -786370, 393216, 7, -786369, 393216, 7, -786368, 393216, 7, -786367, 393216, 7, -786366, 393216, 7, -786365, 393216, 7, -786364, 393216, 7, -786363, 393216, 7, -786362, 393216, 7, -786361, 393216, 7, -786360, 393216, 7, -786359, 393216, 7, -786358, 393216, 7, -786357, 393216, 7, -786356, 393216, 7, -786355, 393216, 7, -786354, 393216, 7, -786353, 393216, 7, -786352, 393216, 7, -786351, 393216, 7, -786350, 393216, 7, -786349, 393216, 7, -786348, 393216, 7, -262100, 262144, 1, -196564, 262144, 1, -131028, 262144, 1, -65492, 262144, 1, 44, 393216, 7, -917459, 0, 7, -851923, 0, 8, -720851, 0, 8, -655315, 0, 8, -589779, 0, 8, -524243, 0, 8, -458707, 0, 8, -393171, 0, 8, -327635, 0, 8, -262099, 262144, 1, -196563, 262144, 1, -131027, 262144, 1, -65491, 262144, 1, 45, 393216, 7, -720850, 458752, 5, -655314, 458752, 5, -589778, 458752, 5, -524242, 458752, 5, -458706, 458752, 5, -393170, 458752, 5, -327634, 458752, 5, -262098, 458752, 5, -196562, 458752, 5, -131026, 458752, 5, -65490, 458752, 5, 46, 458752, 7, -786347, 393216, 7, -786346, 393216, 7, -786345, 393216, 7, -786344, 393216, 7, -786343, 393216, 7, -786342, 393216, 7, -786341, 393216, 7, -786340, 393216, 7, -786339, 393216, 7, 35, 393216, 7, 36, 393216, 7, 37, 393216, 7, 38, 393216, 7, 39, 393216, 7, 40, 393216, 7, 41, 393216, 7, 42, 393216, 7, 43, 393216, 7, -262109, 196608, 0, -196573, 196608, 1, -262108, 262144, 0, -196572, 262144, 1, -131037, 196608, 0, -65501, 196608, 1, -131036, 262144, 0, -65500, 262144, 1, -262107, 196608, 0, -196571, 196608, 1, -262106, 262144, 0, -196570, 262144, 1, -131035, 196608, 0, -65499, 196608, 1, -131034, 262144, 0, -65498, 262144, 1, -262105, 196608, 0, -196569, 196608, 1, -262104, 262144, 0, -196568, 262144, 1, -131033, 196608, 0, -65497, 196608, 1, -131032, 262144, 0, -65496, 262144, 1, -262103, 196608, 0, -196567, 196608, 1, -262102, 262144, 0, -196566, 262144, 1, -131031, 196608, 0, -65495, 196608, 1, -131030, 262144, 0, -65494, 262144, 1, -262101, 196608, 0, -196565, 196608, 1, -131029, 196608, 0, -65493, 196608, 1, -786338, 393216, 7, -786337, 393216, 7, -786336, 393216, 7, -786335, 393216, 7, -786334, 393216, 7, -786333, 393216, 7, -786332, 393216, 7, -786331, 393216, 7, -786330, 393216, 7, -786329, 393216, 7, -786328, 393216, 7, -786327, 393216, 7, -786326, 393216, 7, -786325, 393216, 7, -786324, 393216, 7, -786323, 393216, 7, -786322, 393216, 7, -786321, 393216, 7, -786320, 393216, 7, -786319, 393216, 7, -786318, 393216, 7, -786317, 393216, 7, -786316, 393216, 7, -786315, 393216, 7, -786314, 393216, 7, -786313, 393216, 7, -786312, 458752, 4)
+
+[node name="Player" parent="." instance=ExtResource("3_q576y")]
+position = Vector2(0, -12)
+
+[node name="Camera" parent="Player" instance=ExtResource("3_wi242")]
+
+[node name="BackgroundLighting" parent="." instance=ExtResource("4_da4cc")]
+
+[node name="DarkLighting" parent="." instance=ExtResource("5_3ic5c")]
+
+[node name="InitialPos" parent="." instance=ExtResource("6_ql085")]
+position = Vector2(0, -7)
+
+[node name="TextLayer" type="CanvasLayer" parent="."]
+layer = -1
+follow_viewport_enabled = true
+
+[node name="Label" type="Label" parent="TextLayer"]
+offset_left = -64.0
+offset_top = -72.0
+offset_right = 64.0
+offset_bottom = -48.0
+text = "Use Arrows or WASD
+to Move"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TextLayer"]
+offset_left = 136.0
+offset_top = -88.0
+offset_right = 232.0
+offset_bottom = -64.0
+text = "Press Up or W
+to Jump"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="TextLayer"]
+offset_left = 352.0
+offset_top = -120.0
+offset_right = 448.0
+offset_bottom = -96.0
+text = "Hold Up or W
+to Jump higher"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="TextLayer"]
+offset_left = 584.0
+offset_top = -136.0
+offset_right = 696.0
+offset_bottom = -112.0
+text = "Hold Up or W
+to Climb Ladders"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="TextLayer"]
+offset_left = 808.0
+offset_top = -272.0
+offset_right = 984.0
+offset_bottom = -240.0
+text = "Knights patrol along their
+designated path marked
+by torches"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Label6" type="Label" parent="TextLayer"]
+offset_left = 1064.0
+offset_top = -272.0
+offset_right = 1192.0
+offset_bottom = -240.0
+text = "Knights will chase 
+you if you enter
+their sight"
+label_settings = ExtResource("7_nps6l")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Knights" type="Node2D" parent="."]
+
+[node name="KnightGreen" parent="Knights" instance=ExtResource("8_orh2w")]
+position = Vector2(1008, -204)
+
+[node name="KnightBlue" parent="Knights" instance=ExtResource("5_amwwm")]
+position = Vector2(1400, -204)
+
+[node name="RightPatrol" parent="Knights/KnightBlue" index="2"]
+position = Vector2(219, 1)
+
+[node name="KnightRed" parent="Knights" instance=ExtResource("10_ip5bs")]
+position = Vector2(1766, -204)
+
+[node name="LeftPatrol" parent="Knights/KnightRed" index="1"]
+position = Vector2(-234, 0)
+
+[node name="Ladders" type="Node2D" parent="."]
+
+[node name="Ladder" parent="Ladders" instance=ExtResource("9_uakde")]
+position = Vector2(397, -129)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladders/Ladder"]
+position = Vector2(331, -14)
+shape = SubResource("RectangleShape2D_mwa2o")
+
+[editable path="Knights/KnightBlue"]
+[editable path="Knights/KnightRed"]

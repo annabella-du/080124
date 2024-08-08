@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cebw2v5pxf384"]
+
+[node name="InitialPos" type="Node2D" groups=["initial_pos"]]
+position = Vector2(-20, -7)
