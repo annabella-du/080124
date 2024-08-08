@@ -67,6 +67,8 @@ var blue_key_saved := false
 ### OTHER VARIABLES ###
 var paused := false
 var hurt_anim := false
+var transition_anim := false
+var dead := false
 
 ### SIGNALS ###
 signal lever_on_signal
@@ -84,11 +86,16 @@ func _ready():
 	cooldown_bar_node.max_value = attack_cooldown_node.wait_time
 	cooldown_bar_node.value = cooldown_bar_node.max_value
 	coyote_timer_node.wait_time = coyote_time
+	### PLAY APPEAR ANIMATION ###
+	transition_anim = true
+	animation_node.play("appear")
 
 func _physics_process(delta):
 	if !paused: #nothing happens when paused
-		movement(delta)
-		animation()
+		if !transition_anim and !dead:
+			movement(delta)
+		if !transition_anim and !hurt_anim:
+			animation()
 		attack()
 		update_coins_keys()
 		move_and_slide() #DON'T DELETE THIS
@@ -147,13 +154,12 @@ func movement(delta : float):
 			velocity.y = 0
 
 func animation():
-	if !hurt_anim: #only runs when player isn't hurt
-		if !is_on_floor():
-			animation_node.play("jump")
-		elif velocity.x == 0:
-			animation_node.play("idle")
-		else:
-			animation_node.play("run")
+	if !is_on_floor():
+		animation_node.play("jump")
+	elif velocity.x == 0:
+		animation_node.play("idle")
+	else:
+		animation_node.play("run")
 
 func attack():
 	### ATTACK ###
@@ -228,6 +234,9 @@ func respawn():
 	else:
 		global_position = global.active_checkpoint.global_position
 		global_position.y += 6
+	### APPEAR ANIMATION ###
+	transition_anim = true
+	animation_node.play("appear")
 
 ### AREA2D FUNCTIONS###
 func _on_hurt_box_area_entered(area):
@@ -238,6 +247,7 @@ func _on_hurt_box_area_entered(area):
 			animation_node.play("hurt")
 		else: #dead
 			animation_node.play("die")
+			dead = true
 			respawn_cooldown_node.start()
 
 func _on_coin_detection_area_entered(area):
@@ -275,4 +285,6 @@ func _on_global_unpause(): #connected from global signal
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurt_anim = false
-
+	elif anim_name == "appear":
+		transition_anim = false
+		dead = false

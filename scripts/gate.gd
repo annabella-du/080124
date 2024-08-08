@@ -16,8 +16,8 @@ var saved := false
 func _ready():
 	activate_light_node.visible = false
 
-func _physics_process(_delta):
-	if can_interact and Input.is_action_just_pressed("interact") and !saved:
+func _input(event):
+	if can_interact and event.is_action_pressed("interact") and !saved:
 		match gate_color:
 			0: #red
 				if player_node.red_key == true:

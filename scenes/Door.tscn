@@ -4,8 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://lap0wph7cchm" path="res://assets/custom assets/door.png" id="2_d4keq"]
 [ext_resource type="FontFile" uid="uid://do7rqgojjbhfr" path="res://assets/custom assets/PixelOperator8.ttf" id="3_nuk06"]
 
-[sub_resource type="Animation" id="Animation_keiiq"]
-resource_name = "closed"
+[sub_resource type="Animation" id="Animation_3v151"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -20,7 +19,8 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3v151"]
+[sub_resource type="Animation" id="Animation_keiiq"]
+resource_name = "closed"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false

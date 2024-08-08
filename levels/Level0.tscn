@@ -1,21 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://do35cdniy37m4"]
+[gd_scene load_steps=12 format=3 uid="uid://do35cdniy37m4"]
 
-[ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_oghll"]
-[ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="2_hyg3h"]
-[ext_resource type="PackedScene" uid="uid://c4nwu3mw6c5hb" path="res://scenes/knights/KnightRed.tscn" id="3_sqlxg"]
-[ext_resource type="Texture2D" uid="uid://xigm5cetvuxp" path="res://assets/custom assets/background.png" id="4_ir0q4"]
-[ext_resource type="PackedScene" uid="uid://dj4bxfjs0mv7i" path="res://scenes/PotionsParent.tscn" id="5_4xxi6"]
-[ext_resource type="PackedScene" uid="uid://5t1igw4r8b7o" path="res://scenes/Checkpoint.tscn" id="9_sn8l4"]
-[ext_resource type="PackedScene" uid="uid://t5jxx1cpbpkw" path="res://scenes/chests/ChestBlue.tscn" id="10_uwhy1"]
-[ext_resource type="PackedScene" uid="uid://c0hhg1ysg1ers" path="res://scenes/gates/GateGreen.tscn" id="11_dy27p"]
-[ext_resource type="PackedScene" uid="uid://clctep8pf5a7r" path="res://scenes/chests/ChestGreen.tscn" id="11_e5sub"]
-[ext_resource type="PackedScene" uid="uid://cvyntvc5a28f1" path="res://scenes/chests/ChestRed.tscn" id="12_6oy1v"]
-[ext_resource type="PackedScene" uid="uid://cbgkf1c4fl6gi" path="res://scenes/gates/GateBlue.tscn" id="12_xmmlu"]
-[ext_resource type="PackedScene" uid="uid://c24dn1t14rfdc" path="res://scenes/gates/GateRed.tscn" id="13_gncut"]
-[ext_resource type="PackedScene" uid="uid://dm2ij4du08bu1" path="res://scenes/Door.tscn" id="13_hr2mr"]
+[ext_resource type="Texture2D" uid="uid://b2asp8mhvu2fo" path="res://assets/castle-tileset.png" id="1_q1l2f"]
+[ext_resource type="Texture2D" uid="uid://xigm5cetvuxp" path="res://assets/custom assets/background.png" id="2_mdwq8"]
+[ext_resource type="PackedScene" uid="uid://b6ooero14q68y" path="res://scenes/Player.tscn" id="3_7xjtg"]
+[ext_resource type="PackedScene" uid="uid://dj4bxfjs0mv7i" path="res://scenes/PotionsParent.tscn" id="4_jpmwp"]
+[ext_resource type="PackedScene" uid="uid://bxou44diy0ov" path="res://scenes/knights/KnightBlue.tscn" id="5_wrmah"]
+[ext_resource type="PackedScene" uid="uid://dv6yheno2uweb" path="res://scenes/Lever.tscn" id="6_ckxx6"]
+[ext_resource type="PackedScene" uid="uid://d33lsavhyihrv" path="res://scenes/Coin.tscn" id="7_rt26x"]
+[ext_resource type="PackedScene" uid="uid://dm2ij4du08bu1" path="res://scenes/Door.tscn" id="8_76esp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i8735"]
-texture = ExtResource("1_oghll")
+texture = ExtResource("1_q1l2f")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -296,7 +291,7 @@ texture = ExtResource("1_oghll")
 0:12/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aanif"]
-texture = ExtResource("4_ir0q4")
+texture = ExtResource("2_mdwq8")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -307,7 +302,7 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_i8735")
 sources/3 = SubResource("TileSetAtlasSource_aanif")
 
-[node name="Game" type="Node2D"]
+[node name="Level0" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = -10
@@ -320,7 +315,7 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "foreground"
 layer_2/tile_data = PackedInt32Array(0, 65536, 1, 1, 65536, 1, 2, 65536, 1, 3, 65536, 1, 4, 65536, 1, 5, 65536, 1, 6, 65536, 1, 7, 65536, 1, 8, 65536, 1, 9, 65536, 1, 10, 65536, 1, 11, 65536, 1, 12, 65536, 1, 13, 65536, 1, 14, 65536, 1, 15, 65536, 1, 16, 65536, 1, 17, 65536, 1, 18, 65536, 1, 19, 65536, 1, 20, 65536, 1, 21, 65536, 1, 22, 65536, 1, 23, 65536, 1, 24, 65536, 1, 25, 65536, 1, 26, 65536, 1, 27, 65536, 1, 28, 65536, 1, 29, 65536, 1, 65535, 65536, 1, 65534, 65536, 1, 65533, 65536, 1, 65532, 65536, 1, 65531, 65536, 1, 65530, 65536, 1, 65529, 65536, 1, 65528, 65536, 1, 65527, 65536, 1, 65526, 65536, 1, 65525, 65536, 1, 65524, 65536, 1, 65523, 65536, 1, 65522, 65536, 1, 65521, 65536, 1, 65520, 65536, 1, 65519, 65536, 1, 65518, 65536, 1, 65517, 65536, 1, 65516, 65536, 1, 65515, 65536, 1, 65514, 65536, 1, 65513, 65536, 1, 65512, 65536, 1, 65511, 65536, 1, 65510, 65536, 1)
 
-[node name="Player" parent="." instance=ExtResource("2_hyg3h")]
+[node name="Player" parent="." instance=ExtResource("3_7xjtg")]
 position = Vector2(-20, -12)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -337,51 +332,63 @@ z_index = -10
 energy = 1.25
 blend_mode = 1
 
-[node name="PotionsParent" parent="." instance=ExtResource("5_4xxi6")]
+[node name="PotionsParent" parent="." instance=ExtResource("4_jpmwp")]
 
 [node name="InitialPos" type="Node2D" parent="." groups=["initial_pos"]]
-position = Vector2(120, -7)
+position = Vector2(-20, -7)
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="KnightRed" parent="Enemies" instance=ExtResource("3_sqlxg")]
-position = Vector2(-250, -12)
+[node name="KnightBlue" parent="Enemies" instance=ExtResource("5_wrmah")]
+position = Vector2(158, -12)
 
 [node name="Levers" type="Node2D" parent="."]
 
+[node name="Lever" parent="Levers" instance=ExtResource("6_ckxx6")]
+position = Vector2(-47, -15)
+
+[node name="Lever2" parent="Levers" instance=ExtResource("6_ckxx6")]
+position = Vector2(-372, -15)
+
 [node name="Coins" type="Node2D" parent="."]
 
+[node name="Coin" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-85, -13)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-117, -12)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-314, -14)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-282, -13)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-259, -14)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-233, -14)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-204, -12)
+
+[node name="Coin8" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-171, -12)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-145, -11)
+
+[node name="Coin10" parent="Coins" instance=ExtResource("7_rt26x")]
+position = Vector2(-337, -14)
+
 [node name="Checkpoints" type="Node2D" parent="."]
-
-[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_sn8l4")]
-position = Vector2(-87, -13)
-
-[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("9_sn8l4")]
-position = Vector2(-54, -13)
 
 [node name="Ladders" type="Node2D" parent="."]
 
 [node name="Chests" type="Node2D" parent="."]
 
-[node name="ChestBlue" parent="Chests" instance=ExtResource("10_uwhy1")]
-position = Vector2(128, -7)
-
-[node name="ChestRed" parent="Chests" instance=ExtResource("11_e5sub")]
-position = Vector2(82, -7)
-
-[node name="ChestRed2" parent="Chests" instance=ExtResource("12_6oy1v")]
-position = Vector2(161, -8)
-
 [node name="Gates" type="Node2D" parent="."]
 
-[node name="GateRed" parent="Gates" instance=ExtResource("13_gncut")]
-position = Vector2(200, -16)
-
-[node name="GateGreen" parent="Gates" instance=ExtResource("11_dy27p")]
-position = Vector2(264, -16)
-
-[node name="GateBlue" parent="Gates" instance=ExtResource("12_xmmlu")]
-position = Vector2(368, -15)
-
-[node name="Door" parent="." instance=ExtResource("13_hr2mr")]
+[node name="Door" parent="." instance=ExtResource("8_76esp")]
 position = Vector2(24, -17)
